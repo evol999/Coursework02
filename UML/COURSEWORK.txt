@@ -1,5 +1,5 @@
 @startuml
-Title CLASS DIAGRAM FOR The Physiotherapy & Sports Injury Centre (PSIC)
+Title CLASS DIAGRAM FOR The The Pi Tuition Centre (PTC) 
 'header: some header
 'footer: some footer
 legend
@@ -10,57 +10,39 @@ end legend
 
 
 package classes <<Rectangle>> {
-	class Appoinment {
-		Integer appID
+	class Subject {
+		Integer subjectID
+		String name
+		String price
+	}
+
+	class Student {
+		Integer studentID
+		String name
+	}
+
+	class Review {
+		Integer reviewID
+		Integer lessonID
+		Integer studentID
+		Integer rating
+		String review
+	}
+
+	class Lesson {
+		Integer lessonID
 		String date
 		String time
-		String room
-		String patientName
-		Integer physicianID
-		set()
-		change()
-		cancel()
-		checkIn()
-	}
-
-	class User {
-		String fullName
-	}
-
-	class Members {
-		Integer idNumber
-		String address
-		String telephoneNumber
-	}
-
-	class ExpertiseType {
-	}
-
-	class Physician {
-		ExpertiseType[] Expertise
+		String subjectID
+		Integer studentID[4]
+		Integer reviewID[4]
+		float averageRating
 	}
 	
-	class ExpertiseType {
-	
-	}
-	class TimeTable {
-		setSchedule()
-		isAvailable()
-		getAllAvailable()
-		setApointmentID()
-	}
-	
-	class TimeSlot{
-		String timeStampStart
-		String timeStampEnd
-		bool isAvailable
-		'String weekDay
-	}
-
-	User <|-- Members
-	Members <|-- Physician
-	Physician *- ExpertiseType
-	TimeTable *- Appoinment
+	'User <|-- Members
+	'Members <|-- Physician
+	'Physician *- ExpertiseType
+	'TimeTable *- Appoinment
 	
 }
 @enduml
