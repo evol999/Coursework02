@@ -16,6 +16,13 @@ import java.util.Properties;
  */
 public class Initialize {
 
+    /**
+     * @return the students
+     */
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
     private Properties prop;
     private ArrayList<Student> students;
 
@@ -75,14 +82,14 @@ public class Initialize {
         for (int i = 0; i < totalStudents; i++) {
             tempStudent = new Student();
             sIndex = String.format(".%02d.", i + 1);
-            keyString = "students" + sIndex;
+            keyString = "student" + sIndex;
             System.out.println(keyString);
 //            tempStudent.setIdNumber(Integer.parseInt(prop.getProperty(keyString + "id")));
 //            tempStudent.setFullName(prop.getProperty(keyString + "name"));
             tempStudent.setStudentID(i);
-            System.out.println(prop.getProperty(keyString + "name"));
+//            System.out.println(prop.getProperty(keyString + "name"));
             tempStudent.setName(prop.getProperty(keyString + "name"));
-            students.add(tempStudent);
+            getStudents().add(tempStudent);
             System.out.println("Added: " + tempStudent.getName());
         }
     }
