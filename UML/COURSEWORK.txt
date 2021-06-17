@@ -1,0 +1,66 @@
+@startuml
+Title CLASS DIAGRAM FOR The Physiotherapy & Sports Injury Centre (PSIC)
+'header: some header
+'footer: some footer
+legend
+By Alberto Rodríguez
+UML 2.0
+end legend
+'caption some caption
+
+
+package classes <<Rectangle>> {
+	class Appoinment {
+		Integer appID
+		String date
+		String time
+		String room
+		String patientName
+		Integer physicianID
+		set()
+		change()
+		cancel()
+		checkIn()
+	}
+
+	class User {
+		String fullName
+	}
+
+	class Members {
+		Integer idNumber
+		String address
+		String telephoneNumber
+	}
+
+	class ExpertiseType {
+	}
+
+	class Physician {
+		ExpertiseType[] Expertise
+	}
+	
+	class ExpertiseType {
+	
+	}
+	class TimeTable {
+		setSchedule()
+		isAvailable()
+		getAllAvailable()
+		setApointmentID()
+	}
+	
+	class TimeSlot{
+		String timeStampStart
+		String timeStampEnd
+		bool isAvailable
+		'String weekDay
+	}
+
+	User <|-- Members
+	Members <|-- Physician
+	Physician *- ExpertiseType
+	TimeTable *- Appoinment
+	
+}
+@enduml
