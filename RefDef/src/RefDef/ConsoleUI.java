@@ -44,4 +44,24 @@ public class ConsoleUI implements StepsInterface {
         menuUser.setText("Please enter your ID");
         return menuUser.runIntCapture();
     }
+
+    public void studentNotFound() {
+        menuUser.reset();
+        menuUser.setText("Student not found");
+        menuUser.runDisplayText();
+
+    }
+
+    public int studentMenuShow(String name) {
+        String greeting = "Hello " + name + " what would you like to do?";
+        menuUser.reset();
+        menuUser.setText(greeting);
+        menuUser.setOption("Book session");         //  1.
+        menuUser.setOption("Cancel session");       //  2.
+        menuUser.setOption("Review session");       //  3.
+        menuUser.setOption("See booked sessions");  //  4.
+        menuUser.runMenu();
+        return menuUser.getSelection();
+
+    }
 }

@@ -43,25 +43,23 @@ class AppFlow {
     private void bookAppointmentStudent() {
         // Enter ID
         //
+        String name = null;
+//        String greeting;
         int studentID;
-        studentID = console.enterStudentID();
-
-
-//        greeting = "Hello Mr. " + name + " what would you like to do?";
-//        UserInput menuUser = new UserInput();
-//        menuUser.setText(greeting);
-//        menuUser.setOption("Book appointment by area of expertise");  //  1.
-//        menuUser.setOption("Book appointment by physician");  //  2.
-//        menuUser.setOption("Cancel appointment");  //  3.
-//        menuUser.setOption("Attend appointment");  //  4.
-//        menuUser.setOption("Report missing appointment");  //  4.
-//        menuUser.runMenu();
-//        if (1 == menuUser.getSelection()) {
-//            bookByArea();
-//        }
-//        if (2 == menuUser.getSelection()) {
-////            bookByPhysician();
-//        }
+        while (null == name) {
+            studentID = console.enterStudentID();
+            name = DataSingleton.getInstance().getStudentNameByID(studentID);
+            if (null == name) {
+                console.studentNotFound();
+            }
+        }
+        selection = console.studentMenuShow(name);
+        if (1 == selection) {
+            bookByArea();
+        }
+        if (2 == selection  {
+//            bookByPhysician();
+        }
 
     }
 
