@@ -15,5 +15,5 @@ public interface StepsInterface {
 
     public int studentMenuShow();
 
-    public String enterStudentID();
+    public int enterStudentID();
 }

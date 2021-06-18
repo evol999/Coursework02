@@ -43,7 +43,9 @@ class AppFlow {
     private void bookAppointmentStudent() {
         // Enter ID
         //
-        console.enterStudentID();
+        int studentID;
+        studentID = console.enterStudentID();
+
 
 //        greeting = "Hello Mr. " + name + " what would you like to do?";
 //        UserInput menuUser = new UserInput();

@@ -140,4 +140,30 @@ class UserInput {
             System.out.println(line);
         }
     }
+
+    int runIntCapture() {
+        boolean invalidInput = Boolean.TRUE;
+
+        while (invalidInput) {
+            // Trying to clear screen but not working.
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+
+            for (String line : textToDisplay) {
+                System.out.println(line);
+            }
+            try {
+                selection = input.nextInt();
+                invalidInput = Boolean.FALSE;
+
+            } catch (InputMismatchException e) {
+                invalidInput = Boolean.TRUE;
+            }
+            input.nextLine();
+        }
+        if (invalidInput) {
+            System.out.println("Invalid selection");
+        }
+        return getSelection();
+    }
 }
