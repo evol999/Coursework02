@@ -41,7 +41,7 @@ public class ConsoleUI implements StepsInterface {
     @Override
     public int enterStudentID() {
         menuUser.reset();
-        menuUser.setText("Por favor ingrese su ID");
+        menuUser.setText("Please enter your ID");
         return menuUser.runIntCapture();
     }
 }
