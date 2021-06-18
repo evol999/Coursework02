@@ -30,8 +30,8 @@ class AppFlow {
     private Processes selection;
 
     void run() {
+        UserInput menuUser = new UserInput();
         while (Boolean.TRUE) {
-            UserInput menuUser = new UserInput();
             menuUser.setText("Are you a student or an admin?");
             menuUser.setOption("Student");  //  1.
             menuUser.setOption("Administrator");  //  2.
@@ -46,6 +46,7 @@ class AppFlow {
             if (3 == menuUser.getSelection()) {
                 break;
             }
+            menuUser.reset();
         }
     }
 
