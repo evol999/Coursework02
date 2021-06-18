@@ -78,6 +78,7 @@ class UserInput {
             }
             try {
                 selection = input.nextInt();
+                input.nextLine();
 
             } catch (InputMismatchException e) {
                 invalidInput = Boolean.TRUE;
