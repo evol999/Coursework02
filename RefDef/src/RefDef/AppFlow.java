@@ -31,7 +31,7 @@ class AppFlow {
     }
 
     private void processStudent() {
-        selection = console.studentMenuShow();
+        selection = console.studentStatusShow();
         if (1 == selection) {
             bookAppointmentStudent();
         }

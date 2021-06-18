@@ -29,7 +29,7 @@ public class ConsoleUI implements StepsInterface {
     }
 
     @Override
-    public int studentMenuShow() {
+    public int studentStatusShow() {
         menuUser.reset();
         menuUser.setText("Are you registered?");
         menuUser.setOption("Yes");  //  1.

@@ -13,7 +13,7 @@ public interface StepsInterface {
 
     public int mainMenuShow();
 
-    public int studentMenuShow();
+    public int studentStatusShow();
 
     public int enterStudentID();
 }
