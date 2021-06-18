@@ -78,12 +78,11 @@ class UserInput {
             }
             try {
                 selection = input.nextInt();
-                input.nextLine();
 
             } catch (InputMismatchException e) {
                 invalidInput = Boolean.TRUE;
-                input.nextLine();
             }
+            input.nextLine();
             if (getSelection() > 0 && getSelection() <= options.size()) {
                 invalidInput = Boolean.FALSE;
             }
@@ -125,8 +124,8 @@ class UserInput {
 
             } catch (InputMismatchException e) {
                 invalidInput = Boolean.TRUE;
-                input.nextLine();
             }
+            input.nextLine();
             if (invalidInput) {
                 System.out.println("Invalid string");
             }
