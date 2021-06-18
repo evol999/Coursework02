@@ -30,29 +30,26 @@ class AppFlow {
     private Processes selection;
 
     void run() {
-        UserInput menuUser = new UserInput();
-        menuUser.setText("Are you a Visitor or a Patient?");
-        menuUser.setOption("Patient");  //  1.
-        menuUser.setOption("Visitor");  //  2.
-        menuUser.setOption("Administrator");  //  3.
-        menuUser.setOption("Exit");  //  4.
-        menuUser.runMenu();
-        if (1 == menuUser.getSelection()) {
-            processUser();
-        }
-        if (2 == menuUser.getSelection()) {
-            processVisitor();
-        }
-        if (3 == menuUser.getSelection()) {
-            processAdmin();
+        while (Boolean.TRUE) {
+            UserInput menuUser = new UserInput();
+            menuUser.setText("Are you a student or an admin?");
+            menuUser.setOption("Student");  //  1.
+            menuUser.setOption("Administrator");  //  2.
+            menuUser.setOption("Exit");  //  3.
+            menuUser.runMenu();
+            if (1 == menuUser.getSelection()) {
+                processStudent();
+            }
+            if (2 == menuUser.getSelection()) {
+                processAdmin();
+            }
+            if (3 == menuUser.getSelection()) {
+                break;
+            }
         }
     }
 
-    private void processVisitor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void processUser() {
+    private void processStudent() {
         UserInput menuUser = new UserInput();
         menuUser.setText("Are you registered?");
         menuUser.setOption("Yes");  //  1.

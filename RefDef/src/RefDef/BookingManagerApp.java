@@ -16,7 +16,11 @@ public class BookingManagerApp {
 
     public static void main(String[] args) {
         ArrayList<Student> students = new ArrayList<>();
+
         Initialize init = new Initialize();
+        students = init.getStudents();
+        AppFlow uI = new AppFlow();
+        uI.run();
 
     }
 }
