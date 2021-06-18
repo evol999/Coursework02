@@ -12,13 +12,11 @@ import java.util.ArrayList;
  * @author evol9
  */
 class AppFlow {
-    private ConsoleInterface console;
+    private ConsoleUI console;
+    private int selection;
 
     void run() {
-        int selection;
         while (Boolean.TRUE) {
-
-
             selection = console.mainMenuShow();
             if (1 == selection) {
                 processStudent();
@@ -33,27 +31,23 @@ class AppFlow {
     }
 
     private void processStudent() {
-        UserInput menuUser = new UserInput();
-        menuUser.setText("Are you registered?");
-        menuUser.setOption("Yes");  //  1.
-        menuUser.setOption("No");  //  2.
-        menuUser.runMenu();
-        if (1 == menuUser.getSelection()) {
-            bookAppointmentUser();
+        selection = console.studentMenuShow();
+        if (1 == selection) {
+            bookAppointmentStudent();
         }
-        if (2 == menuUser.getSelection()) {
-            registerUser();
+        if (2 == selection) {
+            registerStudent();
         }
     }
 
-    private void bookAppointmentUser() {
+    private void bookAppointmentStudent() {
         // Enter ID
         //
-        String name = "Beto", greeting;
+        console.captureText("Por favor ingrese su ID");
 
-        greeting = "Hello Mr. " + name + " what would you like to do?";
+//        greeting = "Hello Mr. " + name + " what would you like to do?";
         UserInput menuUser = new UserInput();
-        menuUser.setText(greeting);
+//        menuUser.setText(greeting);
         menuUser.setOption("Book appointment by area of expertise");  //  1.
         menuUser.setOption("Book appointment by physician");  //  2.
         menuUser.setOption("Cancel appointment");  //  3.
@@ -69,7 +63,7 @@ class AppFlow {
 
     }
 
-    private void registerUser() {
+    private void registerStudent() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -88,7 +82,7 @@ class AppFlow {
     }
 
     public AppFlow() {
-        this.console = new ConsoleInterface();
+        this.console = new ConsoleUI();
     }
 
 }

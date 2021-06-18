@@ -9,8 +9,11 @@ package RefDef;
  *
  * @author evol9
  */
-public interface Menus {
+public interface StepsInterface {
+
     public int mainMenuShow();
 
     public int studentMenuShow();
+
+    public String captureText(String inputText);
 }

@@ -9,11 +9,16 @@ package RefDef;
  *
  * @author evol9
  */
-public class ConsoleInterface implements Menus {
+public class ConsoleUI implements StepsInterface {
+
+    private UserInput menuUser;
+
+    public ConsoleUI() {
+        menuUser = new UserInput();
+    }
 
     @Override
     public int mainMenuShow() {
-        UserInput menuUser = new UserInput();
         menuUser.reset();
         menuUser.setText("Are you a student or an admin?");
         menuUser.setOption("Student");  //  1.
@@ -25,7 +30,19 @@ public class ConsoleInterface implements Menus {
 
     @Override
     public int studentMenuShow() {
-
+        menuUser.reset();
+        menuUser.setText("Are you registered?");
+        menuUser.setOption("Yes");  //  1.
+        menuUser.setOption("No");  //  2.
+        menuUser.runMenu();
+        return menuUser.getSelection();
     }
 
+    @Override
+    public String captureText(String inputText) {
+        menuUser.reset();
+        menuUser.setCapturedText(inputText);
+        menuUser.runTextCapture();
+        return menuUser.getCapturedText();
+    }
 }

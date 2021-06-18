@@ -15,20 +15,6 @@ import java.util.Scanner;
  */
 class UserInput {
 
-    /**
-     * @return the capturedText
-     */
-    public String getCapturedText() {
-        return capturedText;
-    }
-
-    /**
-     * @param capturedText the capturedText to set
-     */
-    public void setCapturedText(String capturedText) {
-        this.capturedText = capturedText;
-    }
-
     static Scanner input;
     private int selection;
     private String capturedText;
@@ -41,6 +27,20 @@ class UserInput {
         textToDisplay = new ArrayList<>();
         options = new ArrayList<>();
         selection = 0;
+    }
+
+    /**
+     * @return the capturedText
+     */
+    public String getCapturedText() {
+        return capturedText;
+    }
+
+    /**
+     * @param capturedText the capturedText to set
+     */
+    public void setCapturedText(String capturedText) {
+        this.capturedText = capturedText;
     }
 
     /**
