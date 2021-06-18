@@ -46,20 +46,20 @@ class AppFlow {
         console.enterStudentID();
 
 //        greeting = "Hello Mr. " + name + " what would you like to do?";
-        UserInput menuUser = new UserInput();
+//        UserInput menuUser = new UserInput();
 //        menuUser.setText(greeting);
-        menuUser.setOption("Book appointment by area of expertise");  //  1.
-        menuUser.setOption("Book appointment by physician");  //  2.
-        menuUser.setOption("Cancel appointment");  //  3.
-        menuUser.setOption("Attend appointment");  //  4.
-        menuUser.setOption("Report missing appointment");  //  4.
-        menuUser.runMenu();
-        if (1 == menuUser.getSelection()) {
-            bookByArea();
-        }
-        if (2 == menuUser.getSelection()) {
-//            bookByPhysician();
-        }
+//        menuUser.setOption("Book appointment by area of expertise");  //  1.
+//        menuUser.setOption("Book appointment by physician");  //  2.
+//        menuUser.setOption("Cancel appointment");  //  3.
+//        menuUser.setOption("Attend appointment");  //  4.
+//        menuUser.setOption("Report missing appointment");  //  4.
+//        menuUser.runMenu();
+//        if (1 == menuUser.getSelection()) {
+//            bookByArea();
+//        }
+//        if (2 == menuUser.getSelection()) {
+////            bookByPhysician();
+//        }
 
     }
 
