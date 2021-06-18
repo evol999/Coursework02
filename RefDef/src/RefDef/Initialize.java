@@ -1,6 +1,5 @@
 package RefDef;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -19,23 +18,14 @@ import java.util.Properties;
 public class Initialize {
 
     private Properties prop;
-    private ArrayList<Student> students;
 
     public Initialize() {
         prop = new Properties();
-        students = new ArrayList<>();
 
         loadFile("config.properties");
         loadStudents();
         System.out.println("Hello from Init");
 
-    }
-
-    /**
-     * @return the students
-     */
-    public ArrayList<Student> getStudents() {
-        return students;
     }
 
     /**
@@ -91,7 +81,7 @@ public class Initialize {
             tempStudent.setStudentID(i);
 //            System.out.println(prop.getProperty(keyString + "name"));
             tempStudent.setName(prop.getProperty(keyString + "name"));
-            getStudents().add(tempStudent);
+            DataSingleton.getInstance().getStudents().add(tempStudent);
             System.out.println("Added: " + tempStudent.getName());
         }
     }
