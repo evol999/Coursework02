@@ -12,41 +12,23 @@ import java.util.ArrayList;
  * @author evol9
  */
 class AppFlow {
-
-    /**
-     * @return the selection
-     */
-    public Processes getSelection() {
-        return selection;
-    }
-
-    /**
-     * @param selection the selection to set
-     */
-    public void setSelection(Processes selection) {
-        this.selection = selection;
-    }
-
-    private Processes selection;
+    private ConsoleInterface console;
 
     void run() {
-        UserInput menuUser = new UserInput();
+        int selection;
         while (Boolean.TRUE) {
-            menuUser.setText("Are you a student or an admin?");
-            menuUser.setOption("Student");  //  1.
-            menuUser.setOption("Administrator");  //  2.
-            menuUser.setOption("Exit");  //  3.
-            menuUser.runMenu();
-            if (1 == menuUser.getSelection()) {
+
+
+            selection = console.mainMenuShow();
+            if (1 == selection) {
                 processStudent();
             }
-            if (2 == menuUser.getSelection()) {
+            if (2 == selection) {
                 processAdmin();
             }
-            if (3 == menuUser.getSelection()) {
+            if (3 == selection) {
                 break;
             }
-            menuUser.reset();
         }
     }
 
@@ -82,7 +64,7 @@ class AppFlow {
             bookByArea();
         }
         if (2 == menuUser.getSelection()) {
-            bookByPhysician();
+//            bookByPhysician();
         }
 
     }
@@ -101,17 +83,12 @@ class AppFlow {
         menuUser.runMenu();
     }
 
-    private void bookByPhysician() {
-        setSelection(Processes.BOOK_BY_PHY);
-    }
-
     private void processAdmin() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public enum Processes {
-        EXIT,
-        BOOK_BY_PHY
+    public AppFlow() {
+        this.console = new ConsoleInterface();
     }
 
 }
