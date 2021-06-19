@@ -13,9 +13,9 @@ import java.util.ArrayList;
  */
 class AppFlow {
     private ConsoleUI console;
-    private int selection;
 
     void run() {
+        int selection;
         while (Boolean.TRUE) {
             selection = console.mainMenuShow();
             if (1 == selection) {
@@ -31,6 +31,8 @@ class AppFlow {
     }
 
     private void processStudent() {
+        int selection;
+
         selection = console.studentStatusShow();
         if (1 == selection) {
             bookAppointmentStudent();
@@ -43,6 +45,7 @@ class AppFlow {
     private void bookAppointmentStudent() {
         // Enter ID
         //
+        int selection;
         String name = null;
 //        String greeting;
         int studentID;
