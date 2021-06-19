@@ -19,7 +19,7 @@ public interface StepsInterface {
 
     public void studentNotFound();
 
-    public int studentMenuShow(String name);
+    public int studentMenuShow(int studentID);
 
     public String enterStudentName();
 

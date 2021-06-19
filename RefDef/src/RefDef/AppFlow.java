@@ -46,7 +46,7 @@ class AppFlow {
         int selection;
         String name = null;
 //        String greeting;
-        int studentID;
+        int studentID = 0;
         while (null == name) {
             studentID = console.enterStudentID();
             name = DataSingleton.getInstance().getStudentNameByID(studentID);
@@ -54,7 +54,7 @@ class AppFlow {
                 console.studentNotFound();
             }
         }
-        selection = console.studentMenuShow(name);
+        selection = console.studentMenuShow(studentID);
         if (1 == selection) {
             bookSession();
         }

@@ -53,7 +53,8 @@ public class ConsoleUI implements StepsInterface {
     }
 
     @Override
-    public int studentMenuShow(String name) {
+    public int studentMenuShow(int studentID) {
+        String name = DataSingleton.getInstance().getStudentNameByID(studentID);
         String greeting = "Hello " + name + " what would you like to do?";
         menuUser.reset();
         menuUser.setText(greeting);
