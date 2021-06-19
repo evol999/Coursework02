@@ -5,8 +5,6 @@
  */
 package RefDef;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author evol9
@@ -58,7 +56,7 @@ class AppFlow {
         }
         selection = console.studentMenuShow(name);
         if (1 == selection) {
-            bookByArea();
+            bookSession();
         }
         if (2 == selection) {
 //            bookByPhysician();
@@ -78,22 +76,17 @@ class AppFlow {
         console.registrationSuccess(tempStudent);
     }
 
-    private void bookByArea() {
-        UserInput menuUser = new UserInput();
-        ArrayList<String> Areas = new ArrayList<>();
-
-        menuUser.setText("");
-        menuUser.setOption("Yes");  //  1.
-        menuUser.setOption("No");  //  2.
-        menuUser.runMenu();
-    }
-
     private void processAdmin() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public AppFlow() {
         this.console = new ConsoleUI();
+    }
+
+    private void bookSession() {
+        int selection;
+//        selection = console.selectSubject();
     }
 
 }
