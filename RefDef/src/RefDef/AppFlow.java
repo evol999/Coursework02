@@ -56,7 +56,7 @@ class AppFlow {
         }
         selection = console.studentMenuShow(studentID);
         if (1 == selection) {
-            bookSession();
+            bookSession(studentID);
         }
         if (2 == selection) {
 //            bookByPhysician();
@@ -83,9 +83,22 @@ class AppFlow {
         this.console = new ConsoleUI();
     }
 
-    private void bookSession() {
+    private void bookSession(int studentID) {
         int selection;
-        selection = console.selectSubject();
-    }
+        /*        Lesson tempLesson = new Lesson();
 
+        tempLesson.setStudentID(studentID);
+        selection = console.selectSubject();
+        tempLesson.setLesson(selection);
+        selection = console.selectDate();
+        tempLesson.setDate(selection);
+        selection = console.selectSession();
+        tempLesson.setSession(selection);
+        if (isAvailable(tempLesson)) {
+            DataSingleton.getInstance().getLessons().add(tempLesson);
+            console.bookSuccess();
+        } else {
+            console.lessonNotAvailable();
+        }*/
+    }
 }
