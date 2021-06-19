@@ -75,6 +75,7 @@ public class ConsoleUI implements StepsInterface {
 
     }
 
+    @Override
     public void registrationSuccess(Student student) {
         menuUser.reset();
         menuUser.setText("Registration success!!!");

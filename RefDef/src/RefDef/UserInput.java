@@ -163,9 +163,9 @@ class UserInput {
                 invalidInput = Boolean.TRUE;
             }
             input.nextLine();
-        }
-        if (invalidInput) {
-            System.out.println("Invalid selection");
+            if (invalidInput) {
+                System.out.println("Invalid input");
+            }
         }
         return getSelection();
     }
