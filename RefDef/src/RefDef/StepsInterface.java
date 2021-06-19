@@ -21,4 +21,6 @@ public interface StepsInterface {
 
     public int studentMenuShow(String name);
 
+    public String enterStudentName();
+
 }

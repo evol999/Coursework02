@@ -65,4 +65,13 @@ public class ConsoleUI implements StepsInterface {
         return menuUser.getSelection();
 
     }
+
+    @Override
+    public String enterStudentName() {
+        menuUser.reset();
+        menuUser.setText("Please enter your name:");
+        menuUser.runTextCapture();
+        return menuUser.getCapturedText();
+
+    }
 }
