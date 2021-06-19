@@ -74,4 +74,12 @@ public class ConsoleUI implements StepsInterface {
         return menuUser.getCapturedText();
 
     }
+
+    public void registrationSuccess(Student student) {
+        menuUser.reset();
+        menuUser.setText("Registration success!!!");
+        menuUser.setText("Congratulations " + student.getName());
+        menuUser.setText("Your ID is " + student.getStudentID());
+        menuUser.runDisplayText();
+    }
 }

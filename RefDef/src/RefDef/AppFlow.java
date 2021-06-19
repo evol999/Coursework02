@@ -74,6 +74,8 @@ class AppFlow {
 
         tempStudent.setStudentID(totalStudents + 1);
         tempStudent.setName(console.enterStudentName());
+        DataSingleton.getInstance().getStudents().add(tempStudent);
+        console.registrationSuccess(tempStudent);
     }
 
     private void bookByArea() {

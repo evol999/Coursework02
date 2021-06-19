@@ -23,4 +23,6 @@ public interface StepsInterface {
 
     public String enterStudentName();
 
+    public void registrationSuccess(Student student);
+
 }
