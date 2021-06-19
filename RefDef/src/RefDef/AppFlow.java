@@ -57,7 +57,7 @@ class AppFlow {
         if (1 == selection) {
             bookByArea();
         }
-        if (2 == selection  {
+        if (2 == selection) {
 //            bookByPhysician();
         }
 
