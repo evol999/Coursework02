@@ -45,13 +45,14 @@ public class ConsoleUI implements StepsInterface {
         return menuUser.runIntCapture();
     }
 
+    @Override
     public void studentNotFound() {
         menuUser.reset();
         menuUser.setText("Student not found");
         menuUser.runDisplayText();
-
     }
 
+    @Override
     public int studentMenuShow(String name) {
         String greeting = "Hello " + name + " what would you like to do?";
         menuUser.reset();
