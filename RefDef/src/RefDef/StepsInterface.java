@@ -25,4 +25,6 @@ public interface StepsInterface {
 
     public void registrationSuccess(Student student);
 
+    public int selectSubject();
+
 }

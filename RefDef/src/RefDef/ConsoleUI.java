@@ -5,6 +5,8 @@
  */
 package RefDef;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author evol9
@@ -83,5 +85,18 @@ public class ConsoleUI implements StepsInterface {
         menuUser.setText("Congratulations " + student.getName());
         menuUser.setText("Your ID is " + student.getStudentID());
         menuUser.runDisplayText();
+    }
+
+    public int selectSubject() {
+        ArrayList<Subject> subjectList;
+
+        menuUser.reset();
+        subjectList = DataSingleton.getInstance().getSubjects();
+
+        for (Subject tempSubject : subjectList) {
+//            System.out.println("name: " + tempSubject.getName() + " id: " + tempSubject.getSubjectID());
+            menuUser.setOption(tempSubject.getName());
+        }
+        return menuUser.runMenu();
     }
 }

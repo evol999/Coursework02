@@ -86,7 +86,7 @@ class AppFlow {
 
     private void bookSession() {
         int selection;
-//        selection = console.selectSubject();
+        selection = console.selectSubject();
     }
 
 }
