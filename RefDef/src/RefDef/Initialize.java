@@ -24,6 +24,7 @@ public class Initialize {
 
         loadFile("config.properties");
         loadStudents();
+        loadSubjects();
         System.out.println("Hello from Init");
 
     }
@@ -86,4 +87,36 @@ public class Initialize {
         }
     }
 
+    private void loadSubjects() {
+        Subject tempSubject;
+        int totalSubjects = 0;
+        String sIndex;
+        String keyString;
+        ArrayList<String> subjectKeyList = new ArrayList<>();
+
+        for (Object key : getProp().keySet()) {
+            if (key.toString().startsWith("subject")) {
+                subjectKeyList.add(key.toString());
+                System.out.println("Added: " + key);
+            }
+        }
+//        every subject has 2 property
+        totalSubjects = subjectKeyList.size() / 2;
+
+        for (int i = 0; i < totalSubjects; i++) {
+            tempSubject = new Subject();
+            sIndex = String.format(".%02d.", i + 1);
+            keyString = "subject" + sIndex;
+            System.out.println(keyString);
+//            tempSubject.setIdNumber(Integer.parseInt(prop.getProperty(keyString + "id")));
+//            tempSubject.setFullName(prop.getProperty(keyString + "name"));
+            tempSubject.setSubjectID(i + 1);
+//            System.out.println(prop.getProperty(keyString + "name"));
+            tempSubject.setName(prop.getProperty(keyString + "name"));
+            tempSubject.setPrice(Double.parseDouble(prop.getProperty(keyString + "price")));
+            DataSingleton.getInstance().getSubjects().add(tempSubject);
+            System.out.println("Added: " + tempSubject.getName());
+            System.out.println("price: " + tempSubject.getPrice());
+        }
+    }
 }

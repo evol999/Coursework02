@@ -10,6 +10,9 @@ package RefDef;
  * @author evol9
  */
 public class Subject {
+    private int subjectID;
+    private String name;
+    private double price;
 
     /**
      * @return the subjectID
@@ -52,7 +55,4 @@ public class Subject {
     public void setPrice(double price) {
         this.price = price;
     }
-    private int subjectID;
-    private String name;
-    private double price;
 }

@@ -21,9 +21,18 @@ public class DataSingleton {
         return instance;
     }
     private ArrayList<Student> students;
+    private ArrayList<Subject> subjects;
 
     private DataSingleton() {
         students = new ArrayList<>();
+        subjects = new ArrayList<>();
+    }
+
+    /**
+     * @return the subjects
+     */
+    public ArrayList<Subject> getSubjects() {
+        return subjects;
     }
 
     /**
