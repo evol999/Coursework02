@@ -78,7 +78,7 @@ public class Initialize {
             System.out.println(keyString);
 //            tempStudent.setIdNumber(Integer.parseInt(prop.getProperty(keyString + "id")));
 //            tempStudent.setFullName(prop.getProperty(keyString + "name"));
-            tempStudent.setStudentID(i);
+            tempStudent.setStudentID(i + 1);
 //            System.out.println(prop.getProperty(keyString + "name"));
             tempStudent.setName(prop.getProperty(keyString + "name"));
             DataSingleton.getInstance().getStudents().add(tempStudent);
