@@ -125,7 +125,10 @@ class UserInput {
             } catch (InputMismatchException e) {
                 invalidInput = Boolean.TRUE;
             }
-            input.nextLine();
+//            input.nextLine();
+            if (!getCapturedText().matches("^[a-zA-Z]*$") || null == getCapturedText()) {
+                invalidInput = Boolean.TRUE;
+            }
             if (invalidInput) {
                 System.out.println("Invalid string");
             }

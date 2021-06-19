@@ -67,7 +67,13 @@ class AppFlow {
     }
 
     private void registerStudent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Student tempStudent;
+
+        tempStudent = new Student();
+        int totalStudents = DataSingleton.getInstance().getStudents().size();
+
+        tempStudent.setStudentID(totalStudents + 1);
+        tempStudent.setName(console.enterStudentName());
     }
 
     private void bookByArea() {
