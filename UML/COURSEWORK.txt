@@ -13,7 +13,7 @@ package classes <<Rectangle>> {
 	class Subject {
 		Integer subjectID
 		String name
-		String price
+		double price
 	}
 
 	class Student {
