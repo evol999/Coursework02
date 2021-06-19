@@ -33,7 +33,7 @@ package classes <<Rectangle>> {
 		Integer lessonID
 		String date
 		String time
-		String subjectID
+		Integer subjectID
 		Integer studentID[4]
 		Integer reviewID[4]
 		float averageRating
