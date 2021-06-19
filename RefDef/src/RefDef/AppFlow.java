@@ -65,9 +65,8 @@ class AppFlow {
     }
 
     private void registerStudent() {
-        Student tempStudent;
+        Student tempStudent = new Student();
 
-        tempStudent = new Student();
         int totalStudents = DataSingleton.getInstance().getStudents().size();
 
         tempStudent.setStudentID(totalStudents + 1);
