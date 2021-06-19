@@ -126,7 +126,7 @@ class UserInput {
                 invalidInput = Boolean.TRUE;
             }
 //            input.nextLine();
-            if (!getCapturedText().matches("^[a-zA-Z]*$") || null == getCapturedText()) {
+            if (!getCapturedText().matches("^[a-zA-Z]*$") || getCapturedText().equals("")) {
                 invalidInput = Boolean.TRUE;
             }
             if (invalidInput) {
