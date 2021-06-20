@@ -106,4 +106,20 @@ public class DataSingleton {
             tempDate = tempDate.plusDays(6);
         }
     }
+
+    void addLesson(Lesson tempLesson) {
+
+    }
+
+    public enum Session {
+        MORNING,
+        AFTERNOON,
+        EVENING
+    }
+
+    public enum AddLessonStatus {
+        SUCCESS,
+        NOT_EMPTY_SEATS,
+        ALREADY_BOOK
+    }
 }
