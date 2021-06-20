@@ -34,9 +34,12 @@ public class WorkingDate {
 
     public static String formatDate(LocalDateTime date) {
         String formatedDate;
-        DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("E, yy.MM.dd");
+        DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("E, yyyy.MM.dd");
         formatedDate = date.format(myFormat);
         return formatedDate;
+    }
+    public static String formatDate(WorkingDate date) {
+        return formatDate(date.getDate());
     }
     private int workingDateID;
     private LocalDateTime date;
