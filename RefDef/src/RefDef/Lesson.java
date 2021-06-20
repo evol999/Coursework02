@@ -16,7 +16,7 @@ public class Lesson {
     private int lessonID;
     private int subjectID;
     private int dateID;
-    private String session;
+    private int session;
     private Boolean isAvailable;
     private ArrayList<Integer> studentsID;
     private ArrayList<Integer> ReviewID;
@@ -56,16 +56,9 @@ public class Lesson {
     }
 
     /**
-     * @return the session
-     */
-    public String getSession() {
-        return session;
-    }
-
-    /**
      * @param session the session to set
      */
-    public void setSession(String session) {
+    public void setSession(int session) {
         this.session = session;
     }
 
