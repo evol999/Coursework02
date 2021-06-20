@@ -53,4 +53,10 @@ public class DataSingleton {
 
         return retVal;
     }
+
+    void addStudent(Student tempStudent) {
+        int totalStudents = getStudents().size();
+        tempStudent.setStudentID(totalStudents + 1);
+        getStudents().add(tempStudent);
+    }
 }
