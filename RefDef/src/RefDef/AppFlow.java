@@ -90,8 +90,8 @@ class AppFlow {
         selection = console.selectSubject();
         tempLesson.setSubjectID(selection);
         selection = console.selectDate();
-        /*tempLesson.setDate(selection);
-        selection = console.selectSession();
+        tempLesson.setDateID(selection);
+        /*selection = console.selectSession();
         tempLesson.setSession(selection);
         if (isAvailable(tempLesson)) {
             DataSingleton.getInstance().getLessons().add(tempLesson);
