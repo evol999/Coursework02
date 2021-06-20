@@ -114,12 +114,36 @@ public class DataSingleton {
     public enum Session {
         MORNING,
         AFTERNOON,
-        EVENING
+        EVENING;
+
+        public static Session fromInteger(int x) {
+            switch (x) {
+                case 1:
+                    return MORNING;
+                case 2:
+                    return AFTERNOON;
+                case 3:
+                    return EVENING;
+            }
+            return null;
+        }
     }
 
     public enum AddLessonStatus {
         SUCCESS,
         NOT_EMPTY_SEATS,
-        ALREADY_BOOK
+        ALREADY_BOOKED;
+
+        public static AddLessonStatus fromInteger(int x) {
+            switch (x) {
+                case 1:
+                    return SUCCESS;
+                case 2:
+                    return NOT_EMPTY_SEATS;
+                case 3:
+                    return ALREADY_BOOKED;
+            }
+            return null;
+        }
     }
 }

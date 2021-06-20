@@ -5,6 +5,7 @@
  */
 package RefDef;
 
+import RefDef.DataSingleton.Session;
 import java.util.ArrayList;
 
 /**
@@ -12,11 +13,12 @@ import java.util.ArrayList;
  * @author evol9
  */
 public class Lesson {
+
     final private int maxStudents = 4;
     private int lessonID;
     private int subjectID;
     private int dateID;
-    private int session;
+    private Session session;
     private Boolean isAvailable;
     private ArrayList<Integer> studentsID;
     private ArrayList<Integer> ReviewID;
@@ -25,6 +27,20 @@ public class Lesson {
     public Lesson() {
         this.isAvailable = Boolean.TRUE;
         this.studentsID = new ArrayList<>();
+    }
+
+    /**
+     * @return the session
+     */
+    public Session getSession() {
+        return session;
+    }
+
+    /**
+     * @param session the session to set
+     */
+    public void setSession(Session session) {
+        this.session = session;
     }
 
     /**
@@ -59,7 +75,7 @@ public class Lesson {
      * @param session the session to set
      */
     public void setSession(int session) {
-        this.session = session;
+        this.setSession(session);
     }
 
     /**

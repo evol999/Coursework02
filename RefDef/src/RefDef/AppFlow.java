@@ -5,6 +5,8 @@
  */
 package RefDef;
 
+import RefDef.DataSingleton.Session;
+
 /**
  *
  * @author evol9
@@ -92,8 +94,9 @@ class AppFlow {
         selection = console.selectDate();
         tempLesson.setDateID(selection);
         selection = console.selectSession();
-        /*tempLesson.setSession(selection);
-        if (isAvailable(tempLesson)) {
+        tempLesson.setSession(Session.fromInteger(selection));
+        DataSingleton.getInstance().addLesson(tempLesson);
+        /*if (isAvailable(tempLesson)) {
             DataSingleton.getInstance().getLessons().add(tempLesson);
             console.bookSuccess();
         } else {
