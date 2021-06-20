@@ -5,6 +5,7 @@
  */
 package RefDef;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,7 @@ public class Lesson {
     final private int maxStudents = 4;
     private int lessonID;
     private int subjectID;
-    private String date;
+    private LocalDateTime date;
     private String session;
     private Boolean isAvailable;
     private ArrayList<Integer> studentsID;
@@ -58,14 +59,14 @@ public class Lesson {
     /**
      * @return the date
      */
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
     /**
      * @param date the date to set
      */
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
