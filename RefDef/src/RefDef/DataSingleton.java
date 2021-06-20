@@ -38,6 +38,13 @@ public class DataSingleton {
     }
 
     /**
+     * @return the workingDates
+     */
+    public ArrayList<LocalDateTime> getWorkingDates() {
+        return workingDates;
+    }
+
+    /**
      * @return the subjects
      */
     public ArrayList<Subject> getSubjects() {
@@ -69,7 +76,7 @@ public class DataSingleton {
         getStudents().add(tempStudent);
     }
 
-    private String formatDate(LocalDateTime date) {
+    public String formatDate(LocalDateTime date) {
         String formatedDate;
         DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("E, yy.MM.dd");
         formatedDate = date.format(myFormat);
@@ -92,10 +99,10 @@ public class DataSingleton {
         tempDate = baseDate;
 
         for (int i = 0; i < 8; i++) {
-            workingDates.add(tempDate);
+            getWorkingDates().add(tempDate);
             System.out.println("Added: " + formatDate(tempDate));
             tempDate = tempDate.plusDays(1);
-            workingDates.add(tempDate);
+            getWorkingDates().add(tempDate);
             System.out.println("Added: " + formatDate(tempDate));
             tempDate = tempDate.plusDays(6);
         }

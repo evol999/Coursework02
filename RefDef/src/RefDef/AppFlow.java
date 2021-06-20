@@ -89,8 +89,8 @@ class AppFlow {
         tempLesson.addStudentID(studentID);
         selection = console.selectSubject();
         tempLesson.setSubjectID(selection);
-        /*        selection = console.selectDate();
-        tempLesson.setDate(selection);
+        selection = console.selectDate();
+        /*tempLesson.setDate(selection);
         selection = console.selectSession();
         tempLesson.setSession(selection);
         if (isAvailable(tempLesson)) {

@@ -5,6 +5,7 @@
  */
 package RefDef;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -87,6 +88,7 @@ public class ConsoleUI implements StepsInterface {
         menuUser.runDisplayText();
     }
 
+    @Override
     public int selectSubject() {
         ArrayList<Subject> subjectList;
 
@@ -96,6 +98,22 @@ public class ConsoleUI implements StepsInterface {
         for (Subject tempSubject : subjectList) {
 //            System.out.println("name: " + tempSubject.getName() + " id: " + tempSubject.getSubjectID());
             menuUser.setOption(tempSubject.getName());
+        }
+        return menuUser.runMenu();
+    }
+
+    @Override
+    public int selectDate() {
+        ArrayList<LocalDateTime> datetList;
+        String tempString;
+
+        menuUser.reset();
+        datetList = DataSingleton.getInstance().getWorkingDates();
+
+        for (LocalDateTime tempDate : datetList) {
+//            System.out.println("name: " + tempSubject.getName() + " id: " + tempSubject.getSubjectID());
+            tempString = DataSingleton.getInstance().formatDate(tempDate);
+            menuUser.setOption(tempString);
         }
         return menuUser.runMenu();
     }
