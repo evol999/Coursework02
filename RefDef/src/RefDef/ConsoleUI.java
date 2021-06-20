@@ -124,4 +124,15 @@ public class ConsoleUI implements StepsInterface {
         }
         return menuUser.runMenu();
     }
+
+    @Override
+    public int selectSession() {
+        menuUser.reset();
+        menuUser.setText("SESSION SELECTION");
+        menuUser.setOption("Morning");
+        menuUser.setOption("Afternoon");
+        menuUser.setOption("Evening");
+
+        return menuUser.runMenu();
+    }
 }
