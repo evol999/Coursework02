@@ -71,7 +71,7 @@ class UserInput {
             for (String line : textToDisplay) {
                 System.out.println(line);
             }
-            System.out.println("please select from these choices");
+            System.out.println("Please select from these choices:");
             System.out.println("---------------------------------");
             for (String line : options) {
                 System.out.println(line);
