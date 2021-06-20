@@ -5,6 +5,10 @@
  */
 package RefDef;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 
 /**
@@ -22,10 +26,15 @@ public class DataSingleton {
     }
     private ArrayList<Student> students;
     private ArrayList<Subject> subjects;
+    private LocalDateTime baseDate;
+    private ArrayList<LocalDateTime> workingDates;
 
     private DataSingleton() {
         students = new ArrayList<>();
         subjects = new ArrayList<>();
+        workingDates = new ArrayList<>();
+        initBaseDate();
+        initWorkingDates();
     }
 
     /**
@@ -58,5 +67,37 @@ public class DataSingleton {
         int totalStudents = getStudents().size();
         tempStudent.setStudentID(totalStudents + 1);
         getStudents().add(tempStudent);
+    }
+
+    private String formatDate(LocalDateTime date) {
+        String formatedDate;
+        DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("E, yy.MM.dd");
+        formatedDate = date.format(myFormat);
+        return formatedDate;
+    }
+
+    private void initBaseDate() {
+        baseDate = LocalDateTime.now();
+
+        String formatedDate = formatDate(baseDate);
+        System.out.println("current date: " + formatedDate);
+        baseDate = baseDate.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
+        formatedDate = formatDate(baseDate);
+        System.out.println("next Saturday: " + formatedDate);
+
+    }
+
+    private void initWorkingDates() {
+        LocalDateTime tempDate;
+        tempDate = baseDate;
+
+        for (int i = 0; i < 8; i++) {
+            workingDates.add(tempDate);
+            System.out.println("Added: " + formatDate(tempDate));
+            tempDate = tempDate.plusDays(1);
+            workingDates.add(tempDate);
+            System.out.println("Added: " + formatDate(tempDate));
+            tempDate = tempDate.plusDays(6);
+        }
     }
 }
