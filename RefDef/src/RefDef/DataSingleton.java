@@ -7,7 +7,6 @@ package RefDef;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 
@@ -26,8 +25,8 @@ public class DataSingleton {
     }
     private ArrayList<Student> students;
     private ArrayList<Subject> subjects;
-    private LocalDateTime baseDate;
-    private ArrayList<LocalDateTime> workingDates;
+    // private LocalDateTime baseDate;
+    private ArrayList<WorkingDate> workingDates;
 
     private DataSingleton() {
         students = new ArrayList<>();
@@ -40,7 +39,7 @@ public class DataSingleton {
     /**
      * @return the workingDates
      */
-    public ArrayList<LocalDateTime> getWorkingDates() {
+    public ArrayList<WorkingDate> getWorkingDates() {
         return workingDates;
     }
 
@@ -76,35 +75,35 @@ public class DataSingleton {
         getStudents().add(tempStudent);
     }
 
-    public String formatDate(LocalDateTime date) {
-        String formatedDate;
-        DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("E, yy.MM.dd");
-        formatedDate = date.format(myFormat);
-        return formatedDate;
-    }
-
     private void initBaseDate() {
-        baseDate = LocalDateTime.now();
+        LocalDateTime baseDate = LocalDateTime.now();
 
-        String formatedDate = formatDate(baseDate);
+        String formatedDate = WorkingDate.formatDate(baseDate);
         System.out.println("current date: " + formatedDate);
         baseDate = baseDate.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
-        formatedDate = formatDate(baseDate);
+        WorkingDate.setBaseDate(baseDate);
+        formatedDate = WorkingDate.formatDate(baseDate);
         System.out.println("next Saturday: " + formatedDate);
 
     }
 
     private void initWorkingDates() {
-        LocalDateTime tempDate;
-        tempDate = baseDate;
+        WorkingDate tempDate = new WorkingDate();
 
-        for (int i = 0; i < 8; i++) {
+        tempDate.setDate(WorkingDate.getBaseDate());
+
+        for (int i = 1; i < 9; i++) {
+            tempDate.setWorkingDateID(2 * i - 1);
             getWorkingDates().add(tempDate);
-            System.out.println("Added: " + formatDate(tempDate));
-            tempDate = tempDate.plusDays(1);
+            System.out.println("Added: " + WorkingDate.formatDate(tempDate.getDate()) + "ID: " + tempDate.getWorkingDateID());
+
+            tempDate.setDate(tempDate.getDate().plusDays(1));
+
+            tempDate.setWorkingDateID(2 * i);
             getWorkingDates().add(tempDate);
-            System.out.println("Added: " + formatDate(tempDate));
-            tempDate = tempDate.plusDays(6);
+            System.out.println("Added: " + WorkingDate.formatDate(tempDate.getDate()) + "ID: " + tempDate.getWorkingDateID());
+
+            tempDate.setDate(tempDate.getDate().plusDays(6));
         }
     }
 }

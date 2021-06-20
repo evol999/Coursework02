@@ -5,7 +5,6 @@
  */
 package RefDef;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -104,15 +103,15 @@ public class ConsoleUI implements StepsInterface {
 
     @Override
     public int selectDate() {
-        ArrayList<LocalDateTime> datetList;
+        ArrayList<WorkingDate> datetList;
         String tempString;
 
         menuUser.reset();
         datetList = DataSingleton.getInstance().getWorkingDates();
 
-        for (LocalDateTime tempDate : datetList) {
+        for (WorkingDate tempDate : datetList) {
 //            System.out.println("name: " + tempSubject.getName() + " id: " + tempSubject.getSubjectID());
-            tempString = DataSingleton.getInstance().formatDate(tempDate);
+            tempString = WorkingDate.formatDate(tempDate.getDate());
             menuUser.setOption(tempString);
         }
         return menuUser.runMenu();
