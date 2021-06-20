@@ -97,13 +97,13 @@ public class DataSingleton {
             getWorkingDates().add(tempDate);
             System.out.println("Added: " + WorkingDate.formatDate(tempDate.getDate()) + " ID: " + tempDate.getWorkingDateID());
 
-            tempDate.setDate(tempDate.getDate().plusDays(1));
+            tempDate = tempDate.plusDays(1);
 
             tempDate.setWorkingDateID(2 * i);
             getWorkingDates().add(tempDate);
             System.out.println("Added: " + WorkingDate.formatDate(tempDate.getDate()) + " ID: " + tempDate.getWorkingDateID());
 
-            tempDate.setDate(tempDate.getDate().plusDays(6));
+            tempDate = tempDate.plusDays(6);
         }
     }
 }

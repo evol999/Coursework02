@@ -82,4 +82,13 @@ public class WorkingDate {
         System.out.println("next Saturday: " + formatedDate);
 
     }
+
+    WorkingDate plusDays(long i) {
+        WorkingDate tempDate = new WorkingDate();
+
+        tempDate.setDate(getDate().plusDays(i));
+
+        return tempDate;
+
+    }
 }
