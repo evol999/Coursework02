@@ -82,12 +82,14 @@ class AppFlow {
 
     private void bookSession(int studentID) {
         int selection;
-        /*        Lesson tempLesson = new Lesson();
+//        Boolean isOK;
 
-        tempLesson.setStudentID(studentID);
+        Lesson tempLesson = new Lesson();
+
+        tempLesson.addStudentID(studentID);
         selection = console.selectSubject();
-        tempLesson.setLesson(selection);
-        selection = console.selectDate();
+        tempLesson.setSubjectID(selection);
+        /*        selection = console.selectDate();
         tempLesson.setDate(selection);
         selection = console.selectSession();
         tempLesson.setSession(selection);
