@@ -110,7 +110,6 @@ public class DataSingleton {
     }
 
     LessonStatus addLesson(Lesson tempLesson) {
-//        tempLesson
         LessonStatus retVal = LessonStatus.SUCCESS;
 
         return retVal;
@@ -155,7 +154,6 @@ public class DataSingleton {
 
     String generateSignature(Lesson lesson) {
         String retVal;
-        String temp = "";
         int id;
 
         id = lesson.getDateID();
