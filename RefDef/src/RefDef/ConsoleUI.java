@@ -182,17 +182,15 @@ public class ConsoleUI implements StepsInterface {
         String subject;
         String date;
         String session;
-        String lessonID;
 
         name = instance.getStudentNameByID(lesson.getStudentsID().get(0));
         subject = instance.getSubjectNameByID(lesson.getLessonID());
         date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.LONG);
         session = instance.getSessionAsText(lesson.getSession());
         session = session.toLowerCase();
-        lessonID = String.format("%03d", lesson.getLessonID());
         menuUser.reset();
         menuUser.setText("=================================");
-        menuUser.setText("LESSON NOT BOOKED, CAPACITY FULL ");
+        menuUser.setText("LESSON NOT BOOKED, CAPACITY FULL");
         menuUser.setText(name + " unfortunately there is no room left");
         menuUser.setText("Subject: " + subject);
         menuUser.setText("On: " + date);
