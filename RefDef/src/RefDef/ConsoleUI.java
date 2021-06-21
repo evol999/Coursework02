@@ -22,6 +22,7 @@ public class ConsoleUI implements StepsInterface {
     @Override
     public int mainMenuShow() {
         menuUser.reset();
+        menuUser.setText("=================================");
         menuUser.setText("MAIN MENU");
         menuUser.setText("Are you a student or an admin?");
         menuUser.setOption("Student");  //  1.
@@ -34,6 +35,7 @@ public class ConsoleUI implements StepsInterface {
     @Override
     public int studentStatusShow() {
         menuUser.reset();
+        menuUser.setText("=================================");
         menuUser.setText("STUDENT STATUS");
         menuUser.setText("Are you registered?");
         menuUser.setOption("Yes");  //  1.
@@ -45,6 +47,7 @@ public class ConsoleUI implements StepsInterface {
     @Override
     public int enterStudentID() {
         menuUser.reset();
+        menuUser.setText("=================================");
         menuUser.setText("STUDENT ID INPUT");
         menuUser.setText("Please enter your ID");
         return menuUser.runIntCapture();
@@ -53,6 +56,7 @@ public class ConsoleUI implements StepsInterface {
     @Override
     public void studentNotFound() {
         menuUser.reset();
+        menuUser.setText("=================================");
         menuUser.setText("ERROR");
         menuUser.setText("Student not found");
         menuUser.runDisplayText();
@@ -63,6 +67,7 @@ public class ConsoleUI implements StepsInterface {
         String name = DataSingleton.getInstance().getStudentNameByID(studentID);
         String greeting = "Hello " + name + " what would you like to do?";
         menuUser.reset();
+        menuUser.setText("=================================");
         menuUser.setText("STUDENT MENU");
         menuUser.setText(greeting);
         menuUser.setOption("Book session");         //  1.
@@ -77,6 +82,7 @@ public class ConsoleUI implements StepsInterface {
     @Override
     public String enterStudentName() {
         menuUser.reset();
+        menuUser.setText("=================================");
         menuUser.setText("STUDENT NAME INPUT");
         menuUser.setText("Please enter your name:");
         menuUser.runTextCapture();
@@ -87,6 +93,7 @@ public class ConsoleUI implements StepsInterface {
     @Override
     public void registrationSuccess(Student student) {
         menuUser.reset();
+        menuUser.setText("=================================");
         menuUser.setText("REGISTRATION SUCCESS");
         menuUser.setText("Congratulations " + student.getName());
         menuUser.setText("Your ID is " + student.getStudentID());
@@ -98,6 +105,7 @@ public class ConsoleUI implements StepsInterface {
         ArrayList<Subject> subjectList;
 
         menuUser.reset();
+        menuUser.setText("=================================");
         menuUser.setText("SELECT SUBJECT");
         subjectList = DataSingleton.getInstance().getSubjects();
 
@@ -114,6 +122,7 @@ public class ConsoleUI implements StepsInterface {
         String tempString;
 
         menuUser.reset();
+        menuUser.setText("=================================");
         menuUser.setText("DATE SELECTION");
         datetList = DataSingleton.getInstance().getWorkingDates();
 
@@ -128,6 +137,7 @@ public class ConsoleUI implements StepsInterface {
     @Override
     public int selectSession() {
         menuUser.reset();
+        menuUser.setText("=================================");
         menuUser.setText("SESSION SELECTION");
         menuUser.setOption("Morning");
         menuUser.setOption("Afternoon");
