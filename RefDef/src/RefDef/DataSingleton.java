@@ -256,4 +256,19 @@ public class DataSingleton {
         }
     }
 
+    public enum DateFormat {
+        SHORT,
+        LONG;
+
+        public static DateFormat fromInteger(int x) {
+            switch (x) {
+                case 1:
+                    return SHORT;
+                case 2:
+                    return LONG;
+            }
+            return null;
+        }
+    }
+
 }
