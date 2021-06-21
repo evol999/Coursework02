@@ -116,6 +116,16 @@ public class DataSingleton {
 
     }
 
+    private int searchLessonIDbySignature(String signature) {
+        int retVal = 0;
+        for (Lesson lesson : lessons) {
+            if (lesson.getSignature().equals(signature)) {
+                retVal = lesson.getLessonID();
+            }
+        }
+        return retVal;
+    }
+
     public enum Session {
         MORNING,
         AFTERNOON,
