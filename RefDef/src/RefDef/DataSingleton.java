@@ -152,4 +152,29 @@ public class DataSingleton {
             return null;
         }
     }
+
+    String generateSignature(Lesson lesson) {
+        String retVal;
+        int id;
+
+        id = lesson.getDateID();
+        retVal = getLessonDateAsTextByID(id);
+        id = lesson.getSubjectID();
+        retVal += getSubjectAsTextByID(id);
+
+        return retVal;
+    }
+
+    public String getLessonDateAsTextByID(int id) {
+        String retVal = null;
+
+        for (WorkingDate date : workingDates) {
+            if (date.getWorkingDateID() == id) {
+                retVal = WorkingDate.formatDateShort(date);
+            }
+        }
+
+        return retVal;
+    }
+
 }

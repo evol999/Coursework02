@@ -41,6 +41,16 @@ public class WorkingDate {
     public static String formatDate(WorkingDate date) {
         return formatDate(date.getDate());
     }
+    public static String formatDateShort(LocalDateTime date) {
+        String formatedDate;
+        DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+        formatedDate = date.format(myFormat);
+        return formatedDate;
+    }
+
+    public static String formatDateShort(WorkingDate date) {
+        return formatDateShort(date.getDate());
+    }
     private int workingDateID;
     private LocalDateTime date;
     public WorkingDate() {

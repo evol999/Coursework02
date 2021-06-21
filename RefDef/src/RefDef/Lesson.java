@@ -23,6 +23,7 @@ public class Lesson {
     private ArrayList<Integer> studentsID;
     private ArrayList<Integer> ReviewID;
     private double averageRating;
+    private String signature;
 
     public Lesson() {
         this.isAvailable = Boolean.TRUE;
@@ -159,5 +160,19 @@ public class Lesson {
      */
     public void setDateID(int dateID) {
         this.dateID = dateID;
+    }
+
+    /**
+     * @return the signature
+     */
+    public String getSignature() {
+        return signature;
+    }
+
+    /**
+     * @param signature the signature to set
+     */
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 }
