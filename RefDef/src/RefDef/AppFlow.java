@@ -27,6 +27,9 @@ class AppFlow {
             if (3 == selection) {
                 break;
             }
+            if (4 == selection) {
+                printLessons();
+            }
         }
     }
 
@@ -111,6 +114,11 @@ class AppFlow {
             }
         }
 
+    }
+
+    private void printLessons() {
+        DataSingleton instance = DataSingleton.getInstance();
+        instance.printLessons();
     }
 
 }

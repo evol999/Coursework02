@@ -28,6 +28,7 @@ public class ConsoleUI implements StepsInterface {
         menuUser.setOption("Student");  //  1.
         menuUser.setOption("Administrator");  //  2.
         menuUser.setOption("Exit");  //  3.
+        menuUser.setOption("Print lessons");  //  4.
         menuUser.runMenu();
         return menuUser.getSelection();
     }
