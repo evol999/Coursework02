@@ -137,6 +137,7 @@ public class DataSingleton {
         for (Lesson lesson : getLessons()) {
             if (lesson.getSignature().equals(signature)) {
                 retVal = lesson.getLessonID();
+                break;
             }
         }
         return retVal;
@@ -169,12 +170,13 @@ public class DataSingleton {
                         retVal = WorkingDate.formatDateShort(date);
                         break;
                     case LONG:
+                    default:
                         retVal = WorkingDate.formatDate(date);
                         break;
                 }
+                break;
             }
         }
-
         return retVal;
     }
 
@@ -210,6 +212,7 @@ public class DataSingleton {
         for (Lesson lesson : lessons) {
             if (lesson.getLessonID() == id) {
                 retVal = lesson;
+                break;
             }
 
         }
@@ -222,6 +225,7 @@ public class DataSingleton {
         for (Subject subject : subjects) {
             if (subject.getSubjectID() == subjectID) {
                 retVal = subject.getName();
+                break;
             }
         }
         return retVal;
