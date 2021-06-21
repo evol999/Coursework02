@@ -151,7 +151,7 @@ public class DataSingleton {
         int id;
 
         id = lesson.getDateID();
-        retVal = getLessonDateAsTextByID(id);
+        retVal = getLessonDateAsTextByID(id, DateFormat.SHORT);
         id = lesson.getSubjectID();
         retVal += String.format("%03d", id);
         id = lesson.getSession().ordinal();
@@ -159,12 +159,19 @@ public class DataSingleton {
         return retVal;
     }
 
-    public String getLessonDateAsTextByID(int id) {
+    public String getLessonDateAsTextByID(int id, DateFormat format) {
         String retVal = null;
 
         for (WorkingDate date : workingDates) {
             if (date.getWorkingDateID() == id) {
-                retVal = WorkingDate.formatDateShort(date);
+                switch (format) {
+                    case SHORT:
+                        retVal = WorkingDate.formatDateShort(date);
+                        break;
+                    case LONG:
+                        retVal = WorkingDate.formatDate(date);
+                        break;
+                }
             }
         }
 
