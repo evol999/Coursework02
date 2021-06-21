@@ -231,6 +231,10 @@ public class DataSingleton {
         return retVal;
     }
 
+    String getSessionAsText(Session session) {
+        return session.name();
+    }
+
     public enum Session {
         MORNING,
         AFTERNOON,

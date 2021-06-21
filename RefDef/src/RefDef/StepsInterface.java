@@ -33,7 +33,7 @@ public interface StepsInterface {
 
     public void bookSuccess(Lesson lesson);
 
-    public void notEmpty();
+    public void notEmpty(Lesson lesson);
 
     public void alreadyBooked();
 

@@ -98,10 +98,10 @@ class AppFlow {
         if (null != addStatus) {
             switch (addStatus) {
                 case SUCCESS:
-                    console.bookSuccess();
+                    console.bookSuccess(tempLesson);
                     break;
                 case NOT_EMPTY_SEATS:
-                    console.notEmpty();
+                    console.notEmpty(tempLesson);
                     break;
                 case ALREADY_BOOKED:
                     console.alreadyBooked();
