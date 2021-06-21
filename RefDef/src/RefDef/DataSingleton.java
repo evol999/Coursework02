@@ -112,17 +112,17 @@ public class DataSingleton {
     LessonStatus addLesson(Lesson tempLesson) {
         String signature;
         LessonStatus retVal = LessonStatus.SUCCESS;
-        int id;
+        int lessonID;
 
         signature = generateSignature(tempLesson);
-        id = searchLessonIDbySignature(signature);
+        lessonID = searchLessonIDbySignature(signature);
 
-        if (0 == id) {
+        if (0 == lessonID) {
             tempLesson.setLessonID(getNewLessonID());
             tempLesson.setSignature(signature);
             lessons.add(tempLesson);
         } else {
-            retVal = addStudentToLesson(id, tempLesson.getStudentsID().get(0).intValue());
+            retVal = addStudentToLesson(lessonID, tempLesson.getStudentsID().get(0).intValue());
         }
 
 
