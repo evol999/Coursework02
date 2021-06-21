@@ -193,11 +193,11 @@ public class DataSingleton {
 
         Lesson tempLesson = getLessonByID(lessonID);
 
-        if (!tempLesson.getIsAvailable()) {
-            retVal = LessonStatus.NOT_EMPTY_SEATS;
+        if (tempLesson.getStudentsID().indexOf(studentID) != -1) {
+            retVal = LessonStatus.ALREADY_BOOKED;
         } else {
-            if (tempLesson.getStudentsID().indexOf(studentID) != -1) {
-                retVal = LessonStatus.ALREADY_BOOKED;
+            if (!tempLesson.getIsAvailable()) {
+                retVal = LessonStatus.NOT_EMPTY_SEATS;
             } else {
                 tempLesson.addStudentID(studentID);
             }
