@@ -122,7 +122,7 @@ public class DataSingleton {
             tempLesson.setSignature(signature);
             lessons.add(tempLesson);
         } else {
-            retVal = addStudentToLesson(lessonID, tempLesson.getStudentsID().get(0).intValue());
+            retVal = addStudentToLesson(lessonID, tempLesson.getStudentsID().get(0));
         }
 
 
