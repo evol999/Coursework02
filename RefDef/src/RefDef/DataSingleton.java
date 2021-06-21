@@ -242,10 +242,11 @@ public class DataSingleton {
         String date;
         String session;
         String lessonID;
+        Lesson lesson;
 
-        System.out.println("START");
-        for (Lesson lesson : lessons) {
-
+        for (int i = 0; i < lessons.size(); i++) {
+            System.out.println("Lesson: " + String.format("%03d ", i) + "of " + String.format("%03d. ", lessons.size()));
+            lesson = lessons.get(i);
             subject = instance.getSubjectNameByID(lesson.getLessonID());
             date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.LONG);
             session = instance.getSessionAsText(lesson.getSession());
@@ -256,13 +257,13 @@ public class DataSingleton {
             System.out.println("in the " + session);
             System.out.println("lesson ID = " + lessonID);
             System.out.println("Students:");
-            for (int i = 0; i < lesson.getStudentsID().size(); i++) {
-                name = instance.getStudentNameByID(lesson.getStudentsID().get(i));
-                System.out.println(String.format("ID: %03d. ", lesson.getStudentsID().get(i)) + "Name: " + name);
+            for (int j = 0; j < lesson.getStudentsID().size(); j++) {
+                name = instance.getStudentNameByID(lesson.getStudentsID().get(j));
+                System.out.println(String.format("ID: %03d. ", lesson.getStudentsID().get(j)) + "Name: " + name);
             }
 
         }
-        System.out.println("END");
+
     }
 
     public enum Session {
