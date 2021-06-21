@@ -235,6 +235,31 @@ public class DataSingleton {
         return session.name();
     }
 
+    void printLessons() {
+        String name;
+        String subject;
+        String date;
+        String session;
+        String lessonID;
+
+        System.out.println("START");
+        for (Lesson lesson : lessons) {
+
+            name = instance.getStudentNameByID(lesson.getStudentsID().get(0));
+            subject = instance.getSubjectNameByID(lesson.getLessonID());
+            date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.LONG);
+            session = instance.getSessionAsText(lesson.getSession());
+            session = session.toLowerCase();
+            lessonID = String.format("%03d", lesson.getLessonID());
+            System.out.println("Name: " + name);
+            System.out.println("Subject: " + subject);
+            System.out.println("On: " + date);
+            System.out.println("in the " + session);
+            System.out.println("lesson ID = " + lessonID);
+        }
+        System.out.println("END");
+    }
+
     public enum Session {
         MORNING,
         AFTERNOON,
