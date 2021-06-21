@@ -26,11 +26,13 @@ public class DataSingleton {
     private ArrayList<Student> students;
     private ArrayList<Subject> subjects;
     private ArrayList<WorkingDate> workingDates;
+    private ArrayList<Lesson> lessons;
 
     private DataSingleton() {
         students = new ArrayList<>();
         subjects = new ArrayList<>();
         workingDates = new ArrayList<>();
+        lessons = new ArrayList<>();
         initBaseDate();
         initWorkingDates();
     }
@@ -106,7 +108,12 @@ public class DataSingleton {
         }
     }
 
-    void addLesson(Lesson tempLesson) {
+    LessonStatus addLesson(Lesson tempLesson) {
+//        tempLesson
+        LessonStatus retVal = LessonStatus.SUCCESS;
+
+
+        return retVal;
 
     }
 
@@ -128,12 +135,12 @@ public class DataSingleton {
         }
     }
 
-    public enum AddLessonStatus {
+    public enum LessonStatus {
         SUCCESS,
         NOT_EMPTY_SEATS,
         ALREADY_BOOKED;
 
-        public static AddLessonStatus fromInteger(int x) {
+        public static LessonStatus fromInteger(int x) {
             switch (x) {
                 case 1:
                     return SUCCESS;
