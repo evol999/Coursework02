@@ -122,7 +122,7 @@ public class DataSingleton {
             tempLesson.setSignature(signature);
             lessons.add(tempLesson);
         } else {
-            retVal = addStudentToLesson(id, tempLesson.getStudentsID().get(0));
+            retVal = addStudentToLesson(id, tempLesson.getStudentsID().get(0).intValue());
         }
 
 
@@ -178,18 +178,18 @@ public class DataSingleton {
         return lessons;
     }
 
-    private LessonStatus addStudentToLesson(int id, Integer get) {
+    private LessonStatus addStudentToLesson(int lessonID, int studentID) {
         LessonStatus retVal = LessonStatus.SUCCESS;
 
-        Lesson tempLesson = getLessonByID(id);
+        Lesson tempLesson = getLessonByID(lessonID);
 
         if (!tempLesson.getIsAvailable()) {
             retVal = LessonStatus.NOT_EMPTY_SEATS;
         } else {
-            if (tempLesson.getStudentsID().indexOf(id) != -1) {
+            if (tempLesson.getStudentsID().indexOf(studentID) != -1) {
                 retVal = LessonStatus.ALREADY_BOOKED;
             } else {
-                tempLesson.addStudentID(id);
+                tempLesson.addStudentID(studentID);
             }
         }
 
