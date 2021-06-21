@@ -245,17 +245,21 @@ public class DataSingleton {
         System.out.println("START");
         for (Lesson lesson : lessons) {
 
-            name = instance.getStudentNameByID(lesson.getStudentsID().get(0));
             subject = instance.getSubjectNameByID(lesson.getLessonID());
             date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.LONG);
             session = instance.getSessionAsText(lesson.getSession());
             session = session.toLowerCase();
             lessonID = String.format("%03d", lesson.getLessonID());
-            System.out.println("Name: " + name);
             System.out.println("Subject: " + subject);
             System.out.println("On: " + date);
             System.out.println("in the " + session);
             System.out.println("lesson ID = " + lessonID);
+            System.out.println("Students:");
+            for (int i = 0; i < lesson.getStudentsID().size(); i++) {
+                name = instance.getStudentNameByID(lesson.getStudentsID().get(i));
+                System.out.println(String.format("ID: %03d. ", lesson.getStudentsID().get(i)) + "Name: " + name);
+            }
+
         }
         System.out.println("END");
     }
