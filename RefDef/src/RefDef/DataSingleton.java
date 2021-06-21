@@ -81,11 +81,11 @@ public class DataSingleton {
         LocalDateTime baseDate = LocalDateTime.now();
 
         String formatedDate = WorkingDate.formatDate(baseDate);
-        System.out.println("current date: " + formatedDate);
+        // System.out.println("current date: " + formatedDate);
         baseDate = baseDate.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
         WorkingDate.setBaseDate(baseDate);
         formatedDate = WorkingDate.formatDate(baseDate);
-        System.out.println("next Saturday: " + formatedDate);
+        // System.out.println("next Saturday: " + formatedDate);
 
     }
 
@@ -97,13 +97,13 @@ public class DataSingleton {
         for (int i = 1; i < 9; i++) {
             tempDate.setWorkingDateID(2 * i - 1);
             getWorkingDates().add(tempDate);
-            System.out.println("Added: " + WorkingDate.formatDate(tempDate) + " ID: " + tempDate.getWorkingDateID());
+            // System.out.println("Added: " + WorkingDate.formatDate(tempDate) + " ID: " + tempDate.getWorkingDateID());
 
             tempDate = tempDate.plusDays(1);
 
             tempDate.setWorkingDateID(2 * i);
             getWorkingDates().add(tempDate);
-            System.out.println("Added: " + WorkingDate.formatDate(tempDate) + " ID: " + tempDate.getWorkingDateID());
+            // System.out.println("Added: " + WorkingDate.formatDate(tempDate) + " ID: " + tempDate.getWorkingDateID());
 
             tempDate = tempDate.plusDays(6);
         }

@@ -89,10 +89,10 @@ public class WorkingDate {
         baseDate = LocalDateTime.now();
 
         String formatedDate = formatDate(baseDate);
-        System.out.println("current date: " + formatedDate);
+        // System.out.println("current date: " + formatedDate);
         baseDate = baseDate.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
         formatedDate = formatDate(baseDate);
-        System.out.println("next Saturday: " + formatedDate);
+        // System.out.println("next Saturday: " + formatedDate);
 
     }
 

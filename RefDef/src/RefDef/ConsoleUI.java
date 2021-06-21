@@ -110,7 +110,6 @@ public class ConsoleUI implements StepsInterface {
         subjectList = DataSingleton.getInstance().getSubjects();
 
         for (Subject tempSubject : subjectList) {
-//            System.out.println("name: " + tempSubject.getName() + " id: " + tempSubject.getSubjectID());
             menuUser.setOption(tempSubject.getName());
         }
         return menuUser.runMenu();
@@ -127,7 +126,7 @@ public class ConsoleUI implements StepsInterface {
         datetList = DataSingleton.getInstance().getWorkingDates();
 
         for (WorkingDate tempDate : datetList) {
-            System.out.println("date: " + tempDate.getDate() + " id: " + tempDate.getWorkingDateID());
+            // System.out.println("date: " + tempDate.getDate() + " id: " + tempDate.getWorkingDateID());
             tempString = WorkingDate.formatDate(tempDate);
             menuUser.setOption(tempString);
         }

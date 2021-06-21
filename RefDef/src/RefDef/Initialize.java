@@ -25,7 +25,7 @@ public class Initialize {
         loadFile("config.properties");
         loadStudents();
         loadSubjects();
-        System.out.println("Hello from Init");
+        // System.out.println("Hello from Init");
 
     }
 
@@ -66,7 +66,7 @@ public class Initialize {
         for (Object key : getProp().keySet()) {
             if (key.toString().startsWith("student")) {
                 studentKeyList.add(key.toString());
-                System.out.println("Added: " + key);
+                // System.out.println("Added: " + key);
             }
         }
 //        every student has 1 property
@@ -76,14 +76,14 @@ public class Initialize {
             tempStudent = new Student();
             sIndex = String.format(".%02d.", i + 1);
             keyString = "student" + sIndex;
-            System.out.println(keyString);
+            // System.out.println(keyString);
 //            tempStudent.setIdNumber(Integer.parseInt(prop.getProperty(keyString + "id")));
 //            tempStudent.setFullName(prop.getProperty(keyString + "name"));
             tempStudent.setStudentID(i + 1);
 //            System.out.println(prop.getProperty(keyString + "name"));
             tempStudent.setName(prop.getProperty(keyString + "name"));
             DataSingleton.getInstance().getStudents().add(tempStudent);
-            System.out.println("Added: " + tempStudent.getName());
+            // System.out.println("Added: " + tempStudent.getName());
         }
     }
 
@@ -97,7 +97,7 @@ public class Initialize {
         for (Object key : getProp().keySet()) {
             if (key.toString().startsWith("subject")) {
                 subjectKeyList.add(key.toString());
-                System.out.println("Added: " + key);
+                // System.out.println("Added: " + key);
             }
         }
 //        every subject has 2 property
@@ -107,7 +107,7 @@ public class Initialize {
             tempSubject = new Subject();
             sIndex = String.format(".%02d.", i + 1);
             keyString = "subject" + sIndex;
-            System.out.println(keyString);
+            // System.out.println(keyString);
 //            tempSubject.setIdNumber(Integer.parseInt(prop.getProperty(keyString + "id")));
 //            tempSubject.setFullName(prop.getProperty(keyString + "name"));
             tempSubject.setSubjectID(i + 1);
@@ -115,8 +115,8 @@ public class Initialize {
             tempSubject.setName(prop.getProperty(keyString + "name"));
             tempSubject.setPrice(Double.parseDouble(prop.getProperty(keyString + "price")));
             DataSingleton.getInstance().getSubjects().add(tempSubject);
-            System.out.println("Added: " + tempSubject.getName());
-            System.out.println("price: " + tempSubject.getPrice());
+            // System.out.println("Added: " + tempSubject.getName());
+            // System.out.println("price: " + tempSubject.getPrice());
         }
     }
 }
