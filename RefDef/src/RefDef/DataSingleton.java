@@ -110,7 +110,23 @@ public class DataSingleton {
     }
 
     LessonStatus addLesson(Lesson tempLesson) {
+        String signature;
         LessonStatus retVal = LessonStatus.SUCCESS;
+        int id;
+
+        signature = generateSignature(tempLesson);
+        id = searchLessonIDbySignature(signature);
+
+        if (0 == id) {
+            tempLesson.setLessonID(getNewLessonID());
+            tempLesson.setSignature(signature);
+            lessons.add(tempLesson);
+        } else {
+            retVal = addStudentToLesson(id, tempLesson.getStudentsID().get(0));
+        }
+
+
+        tempLesson.setSignature(signature);
 
         return retVal;
 
@@ -118,10 +134,77 @@ public class DataSingleton {
 
     private int searchLessonIDbySignature(String signature) {
         int retVal = 0;
-        for (Lesson lesson : lessons) {
+        for (Lesson lesson : getLessons()) {
             if (lesson.getSignature().equals(signature)) {
                 retVal = lesson.getLessonID();
             }
+        }
+        return retVal;
+    }
+
+    private int getNewLessonID() {
+        return getLessons().size() + 1;
+    }
+
+    String generateSignature(Lesson lesson) {
+        String retVal;
+        int id;
+
+        id = lesson.getDateID();
+        retVal = getLessonDateAsTextByID(id);
+        id = lesson.getSubjectID();
+        retVal += String.format("%03d", id);
+        id = lesson.getSession().ordinal();
+        retVal += String.format("%03d", id);
+        return retVal;
+    }
+
+    public String getLessonDateAsTextByID(int id) {
+        String retVal = null;
+
+        for (WorkingDate date : workingDates) {
+            if (date.getWorkingDateID() == id) {
+                retVal = WorkingDate.formatDateShort(date);
+            }
+        }
+
+        return retVal;
+    }
+
+    /**
+     * @return the lessons
+     */
+    public ArrayList<Lesson> getLessons() {
+        return lessons;
+    }
+
+    private LessonStatus addStudentToLesson(int id, Integer get) {
+        LessonStatus retVal = LessonStatus.SUCCESS;
+
+        Lesson tempLesson = getLessonByID(id);
+
+        if (!tempLesson.getIsAvailable()) {
+            retVal = LessonStatus.NOT_EMPTY_SEATS;
+        } else {
+            if (tempLesson.getStudentsID().indexOf(id) != -1) {
+                retVal = LessonStatus.ALREADY_BOOKED;
+            } else {
+                tempLesson.addStudentID(id);
+            }
+        }
+
+        return retVal;
+
+    }
+
+    private Lesson getLessonByID(int id) {
+        Lesson retVal = null;
+
+        for (Lesson lesson : lessons) {
+            if (lesson.getLessonID() == id) {
+                retVal = lesson;
+            }
+
         }
         return retVal;
     }
@@ -160,31 +243,6 @@ public class DataSingleton {
             }
             return null;
         }
-    }
-
-    String generateSignature(Lesson lesson) {
-        String retVal;
-        int id;
-
-        id = lesson.getDateID();
-        retVal = getLessonDateAsTextByID(id);
-        id = lesson.getSubjectID();
-        retVal += String.format("%03d", id);
-        id = lesson.getSession().ordinal();
-        retVal += String.format("%03d", id);
-        return retVal;
-    }
-
-    public String getLessonDateAsTextByID(int id) {
-        String retVal = null;
-
-        for (WorkingDate date : workingDates) {
-            if (date.getWorkingDateID() == id) {
-                retVal = WorkingDate.formatDateShort(date);
-            }
-        }
-
-        return retVal;
     }
 
 }
