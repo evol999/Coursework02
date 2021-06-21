@@ -31,4 +31,10 @@ public interface StepsInterface {
 
     public int selectSession();
 
+    public void bookSuccess(Lesson lesson);
+
+    public void notEmpty();
+
+    public void alreadyBooked();
+
 }
