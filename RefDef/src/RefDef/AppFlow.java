@@ -95,12 +95,20 @@ class AppFlow {
         selection = console.selectSession();
         tempLesson.setSession(Session.fromInteger(selection));
         addStatus = DataSingleton.getInstance().addLesson(tempLesson);
-        if (DataSingleton.LessonStatus.SUCCESS == addStatus) {
-            console.bookSuccess();
-        } else if (DataSingleton.LessonStatus.NOT_EMPTY_SEATS == addStatus) {
-            console.notEmpty();
-        } else if (DataSingleton.LessonStatus.ALREADY_BOOKED == addStatus) {
-            console.alreadyBooked();
+        if (null != addStatus) {
+            switch (addStatus) {
+                case SUCCESS:
+                    console.bookSuccess();
+                    break;
+                case NOT_EMPTY_SEATS:
+                    console.notEmpty();
+                    break;
+                case ALREADY_BOOKED:
+                    console.alreadyBooked();
+                    break;
+                default:
+                    break;
+            }
         }
 
     }
