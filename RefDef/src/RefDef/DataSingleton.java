@@ -25,7 +25,6 @@ public class DataSingleton {
     }
     private ArrayList<Student> students;
     private ArrayList<Subject> subjects;
-    // private LocalDateTime baseDate;
     private ArrayList<WorkingDate> workingDates;
 
     private DataSingleton() {

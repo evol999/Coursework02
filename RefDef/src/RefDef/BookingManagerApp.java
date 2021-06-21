@@ -16,6 +16,5 @@ public class BookingManagerApp {
         Initialize init = new Initialize();
         AppFlow uI = new AppFlow();
         uI.run();
-
     }
 }

@@ -84,8 +84,6 @@ class AppFlow {
 
     private void bookSession(int studentID) {
         int selection;
-//        Boolean isOK;
-
         Lesson tempLesson = new Lesson();
 
         tempLesson.addStudentID(studentID);
