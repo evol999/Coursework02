@@ -107,7 +107,7 @@ class AppFlow {
                     console.notEmpty(tempLesson);
                     break;
                 case ALREADY_BOOKED:
-                    console.alreadyBooked();
+                    console.alreadyBooked(tempLesson);
                     break;
                 default:
                     break;
