@@ -161,9 +161,9 @@ public class DataSingleton {
         id = lesson.getDateID();
         retVal = getLessonDateAsTextByID(id);
         id = lesson.getSubjectID();
-        retVal += temp.format("%03d", id);
+        retVal += String.format("%03d", id);
         id = lesson.getSession().ordinal();
-        retVal += temp.format("%03d", id);
+        retVal += String.format("%03d", id);
         return retVal;
     }
 
