@@ -209,6 +209,17 @@ public class DataSingleton {
         return retVal;
     }
 
+    String getSubjectNameByID(int subjectID) {
+        String retVal = null;
+
+        for (Subject subject : subjects) {
+            if (subject.getSubjectID() == subjectID) {
+                retVal = subject.getName();
+            }
+        }
+        return retVal;
+    }
+
     public enum Session {
         MORNING,
         AFTERNOON,
