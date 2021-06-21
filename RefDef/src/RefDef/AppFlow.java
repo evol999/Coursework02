@@ -85,6 +85,7 @@ class AppFlow {
     private void bookSession(int studentID) {
         int selection;
         Lesson tempLesson = new Lesson();
+        DataSingleton.LessonStatus addStatus;
 
         tempLesson.addStudentID(studentID);
         selection = console.selectSubject();
@@ -93,12 +94,15 @@ class AppFlow {
         tempLesson.setDateID(selection);
         selection = console.selectSession();
         tempLesson.setSession(Session.fromInteger(selection));
-        DataSingleton.getInstance().addLesson(tempLesson);
-        /*if (isAvailable(tempLesson)) {
-            DataSingleton.getInstance().getLessons().add(tempLesson);
+        addStatus = DataSingleton.getInstance().addLesson(tempLesson);
+        if (DataSingleton.LessonStatus.SUCCESS == addStatus) {
             console.bookSuccess();
-        } else {
-            console.lessonNotAvailable();
-        }*/
+        } else if (DataSingleton.LessonStatus.NOT_EMPTY_SEATS == addStatus) {
+            console.notEmpty();
+        } else if (DataSingleton.LessonStatus.ALREADY_BOOKED == addStatus) {
+            console.alreadyBooked();
+        }
+
     }
+
 }
