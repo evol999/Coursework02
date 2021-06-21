@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class DataSingleton {
 
     private static DataSingleton instance;
+
     public static DataSingleton getInstance() {
         if (null == instance) {
             instance = new DataSingleton();
@@ -112,7 +113,6 @@ public class DataSingleton {
 //        tempLesson
         LessonStatus retVal = LessonStatus.SUCCESS;
 
-
         return retVal;
 
     }
@@ -155,13 +155,15 @@ public class DataSingleton {
 
     String generateSignature(Lesson lesson) {
         String retVal;
+        String temp = "";
         int id;
 
         id = lesson.getDateID();
         retVal = getLessonDateAsTextByID(id);
         id = lesson.getSubjectID();
-        retVal += getSubjectAsTextByID(id);
-
+        retVal += temp.format("%03d", id);
+        id = lesson.getSession().ordinal();
+        retVal += temp.format("%03d", id);
         return retVal;
     }
 
