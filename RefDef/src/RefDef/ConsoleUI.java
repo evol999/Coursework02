@@ -198,7 +198,30 @@ public class ConsoleUI implements StepsInterface {
     }
 
     @Override
-    public void alreadyBooked() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void alreadyBooked(Lesson lesson) {
+        DataSingleton instance = DataSingleton.getInstance();
+        String name;
+        String subject;
+        String date;
+        String session;
+        String lessonID;
+
+        name = instance.getStudentNameByID(lesson.getStudentsID().get(0));
+        subject = instance.getSubjectNameByID(lesson.getLessonID());
+        date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.LONG);
+        session = instance.getSessionAsText(lesson.getSession());
+        session = session.toLowerCase();
+        lessonID = String.format("%03d", lesson.getLessonID());
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("LESSON ALREADY BOOKED");
+        menuUser.setText(name + " you have already booked this session. Below is the info for your reference");
+        menuUser.setText("Subject: " + subject);
+        menuUser.setText("On: " + date);
+        menuUser.setText("in the " + session);
+        menuUser.setText("lesson ID = " + lessonID);
+
+        menuUser.runDisplayText();
+
     }
 }

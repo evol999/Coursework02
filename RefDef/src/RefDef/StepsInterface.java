@@ -35,6 +35,6 @@ public interface StepsInterface {
 
     public void notEmpty(Lesson lesson);
 
-    public void alreadyBooked();
+    public void alreadyBooked(Lesson tempLesson);
 
 }
