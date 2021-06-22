@@ -93,6 +93,7 @@ class AppFlow {
         int selection;
         Lesson tempLesson = new Lesson();
         DataSingleton.LessonStatus addStatus;
+        DataSingleton instance = DataSingleton.getInstance();
 
         tempLesson.addStudentID(studentID);
         selection = console.selectSubject();
@@ -101,7 +102,7 @@ class AppFlow {
         tempLesson.setDateID(selection);
         selection = console.selectSession();
         tempLesson.setSession(Session.fromInteger(selection));
-        addStatus = DataSingleton.getInstance().addLesson(tempLesson);
+        addStatus = instance.addLesson(tempLesson);
         if (null != addStatus) {
             switch (addStatus) {
                 case SUCCESS:
