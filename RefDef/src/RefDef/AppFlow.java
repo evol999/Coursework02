@@ -67,6 +67,9 @@ class AppFlow {
         if (2 == selection) {
             cancelSession(studentID);
         }
+        if (4 == selection) {
+            showBookedSessions(studentID);
+        }
 
     }
 
@@ -143,6 +146,19 @@ class AppFlow {
             console.noLessonsBooked();
         }
 
+    }
+
+    private void showBookedSessions(int studentID) {
+        DataSingleton instance = DataSingleton.getInstance();
+        ArrayList<Lesson> lessonsBookedByStudent = null;
+
+        lessonsBookedByStudent = instance.getLessonsBookedByStudentID(studentID);
+
+        if (0 != lessonsBookedByStudent.size()) {
+            console.showBookedLessons(studentID, lessonsBookedByStudent);
+        } else {
+            console.noLessonsBooked();
+        }
     }
 
 }
