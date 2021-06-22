@@ -224,4 +224,42 @@ public class ConsoleUI implements StepsInterface {
         menuUser.runDisplayText();
 
     }
+
+    int selectFromBookedLessons(int studentID, ArrayList<Lesson> lessonsBookedByStudent) {
+        int retVal;
+        DataSingleton instance = DataSingleton.getInstance();
+        String name;
+        String subject;
+        String date;
+        String session;
+
+        name = instance.getStudentNameByID(studentID);
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("LESSON SELECTION");
+        menuUser.setText("Lessons booked by " + name);
+
+        for (Lesson lesson : lessonsBookedByStudent) {
+            subject = instance.getSubjectNameByID(lesson.getLessonID());
+            date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.SHORT);
+            session = instance.getSessionAsText(lesson.getSession());
+            session = session.toLowerCase();
+            menuUser.setOption(date + " " + subject + " in the " + session + ".");
+        }
+
+        retVal = menuUser.runMenu();
+        return lessonsBookedByStudent.get(retVal - 1).getLessonID();
+    }
+
+    public int confirmation() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("CONFIRM CANCELLATION");
+        menuUser.setText("Are you sure you want to cancel this lesson?");
+        menuUser.setOption("Yes");  //  1.
+        menuUser.setOption("No");  //  2.
+        menuUser.runMenu();
+        return menuUser.getSelection();
+
+    }
 }

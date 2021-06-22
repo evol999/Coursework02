@@ -175,4 +175,13 @@ public class Lesson {
     public void setSignature(String signature) {
         this.signature = signature;
     }
+
+    public boolean isBookedByStudent(int studentID) {
+        boolean retVal = Boolean.FALSE;
+        if (-1 != studentsID.indexOf(studentID)) {
+            retVal = Boolean.TRUE;
+        }
+        return retVal;
+    }
+
 }
