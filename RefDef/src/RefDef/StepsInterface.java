@@ -5,6 +5,8 @@
  */
 package RefDef;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author evol9
@@ -36,5 +38,13 @@ public interface StepsInterface {
     public void notEmpty(Lesson lesson);
 
     public void alreadyBooked(Lesson tempLesson);
+
+    public int selectFromBookedLessons(int studentID, ArrayList<Lesson> lessonsBookedByStudent);
+
+    public int confirmation();
+
+    public void cancellationSuccess();
+
+    public void cancelNotDone();
 
 }

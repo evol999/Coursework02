@@ -227,7 +227,8 @@ public class ConsoleUI implements StepsInterface {
 
     }
 
-    int selectFromBookedLessons(int studentID, ArrayList<Lesson> lessonsBookedByStudent) {
+    @Override
+    public int selectFromBookedLessons(int studentID, ArrayList<Lesson> lessonsBookedByStudent) {
         int retVal;
         DataSingleton instance = DataSingleton.getInstance();
         String name;
@@ -253,6 +254,7 @@ public class ConsoleUI implements StepsInterface {
         return lessonsBookedByStudent.get(retVal - 1).getLessonID();
     }
 
+    @Override
     public int confirmation() {
         menuUser.reset();
         menuUser.setText("=================================");
@@ -262,6 +264,34 @@ public class ConsoleUI implements StepsInterface {
         menuUser.setOption("No");  //  2.
         menuUser.runMenu();
         return menuUser.getSelection();
+
+    }
+
+    @Override
+    public void cancellationSuccess() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("LESSON CANCELED");
+
+        menuUser.runDisplayText();
+
+    }
+
+    public void cancelNotDone() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("LESSON HAS NOT BEEN CANCELED");
+
+        menuUser.runDisplayText();
+
+    }
+
+    void noLessonsBooked() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("STUDENT HAS NO LESSONS BOOKED");
+
+        menuUser.runDisplayText();
 
     }
 }

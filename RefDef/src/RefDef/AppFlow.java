@@ -114,7 +114,6 @@ class AppFlow {
                     break;
             }
         }
-
     }
 
     private void printLessons() {
@@ -135,14 +134,13 @@ class AppFlow {
             selection = console.confirmation();
             if (1 == selection) {
                 instance.cancelLesson(lessonID, studentID);
-//            console.cancelSuccess();
+                console.cancellationSuccess();
             } else {
-//                console.cancelNotDone();
+                console.cancelNotDone();
             }
 
         } else {
-//            console.noLessonsBooked();
-
+            console.noLessonsBooked();
         }
 
     }
