@@ -6,6 +6,7 @@
 package RefDef;
 
 import RefDef.DataSingleton.Session;
+import java.util.ArrayList;
 
 /**
  *
@@ -64,7 +65,7 @@ class AppFlow {
             bookSession(studentID);
         }
         if (2 == selection) {
-//            bookByPhysician();
+            cancelSession(studentID);
         }
 
     }
@@ -119,6 +120,31 @@ class AppFlow {
     private void printLessons() {
         DataSingleton instance = DataSingleton.getInstance();
         instance.printLessons();
+    }
+
+    private void cancelSession(int studentID) {
+        DataSingleton instance = DataSingleton.getInstance();
+        ArrayList<Lesson> lessonsBookedByStudent = null;
+        int lessonID;
+        int selection;
+
+        lessonsBookedByStudent = instance.getLessonsBookedByStudentID(studentID);
+
+        if (0 != lessonsBookedByStudent.size()) {
+            lessonID = console.selectFromBookedLessons(studentID, lessonsBookedByStudent);
+            selection = console.confirmation();
+            if (1 == selection) {
+                instance.cancelLesson(lessonID, studentID);
+//            console.cancelSuccess();
+            } else {
+//                console.cancelNotDone();
+            }
+
+        } else {
+//            console.noLessonsBooked();
+
+        }
+
     }
 
 }

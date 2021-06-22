@@ -245,6 +245,7 @@ public class DataSingleton {
         Lesson lesson;
 
         for (int i = 0; i < lessons.size(); i++) {
+            System.out.println("=================================");
             System.out.println("Lesson: " + String.format("%03d ", i + 1) + "of " + String.format("%03d. ", lessons.size()));
             lesson = lessons.get(i);
             subject = instance.getSubjectNameByID(lesson.getLessonID());
@@ -257,13 +258,37 @@ public class DataSingleton {
             System.out.println("in the " + session);
             System.out.println("lesson ID = " + lessonID);
             System.out.println("Students:");
-            for (int j = 0; j < lesson.getStudentsID().size(); j++) {
-                name = instance.getStudentNameByID(lesson.getStudentsID().get(j));
-                System.out.println(String.format("ID: %03d. ", lesson.getStudentsID().get(j)) + "Name: " + name);
+            if (lesson.getStudentsID().size() > 0) {
+                for (int j = 0; j < lesson.getStudentsID().size(); j++) {
+                    name = instance.getStudentNameByID(lesson.getStudentsID().get(j));
+                    System.out.println(String.format("    ID: %03d. ", lesson.getStudentsID().get(j)) + "Name: " + name);
+                }
+            } else {
+                System.out.println("    No students registered");
             }
 
         }
 
+    }
+
+    ArrayList<Lesson> getLessonsBookedByStudentID(int studentID) {
+        ArrayList<Lesson> retVal = new ArrayList<>();
+        for (Lesson tempLesson : lessons) {
+            if (tempLesson.isBookedByStudent(studentID)) {
+                retVal.add(tempLesson);
+            }
+        }
+
+        return retVal;
+    }
+
+    void cancelLesson(int lessonID, int studentID) {
+        Lesson lesson;
+        int studentIndex;
+
+        lesson = getLessonByID(lessonID);
+        studentIndex = lesson.getStudentsID().indexOf(studentID);
+        lesson.getStudentsID().remove(studentIndex);
     }
 
     public enum Session {
