@@ -114,7 +114,7 @@ public class DataSingleton {
         LessonStatus retVal = LessonStatus.SUCCESS;
         int lessonID;
 
-        signature = generateSignature(tempLesson);
+        signature = generateLessonSignature(tempLesson);
         lessonID = searchLessonIDbySignature(signature);
 
         if (0 == lessonID) {
@@ -148,7 +148,7 @@ public class DataSingleton {
         return getLessons().size() + 1;
     }
 
-    String generateSignature(Lesson lesson) {
+    String generateLessonSignature(Lesson lesson) {
         String retVal;
         int id;
 
