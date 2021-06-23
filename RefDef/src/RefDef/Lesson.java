@@ -21,13 +21,14 @@ public class Lesson {
     private Session session;
     private Boolean isAvailable;
     private ArrayList<Integer> studentsID;
-    private ArrayList<Integer> ReviewID;
+    private ArrayList<Integer> reviewsID;
     private double averageRating;
     private String signature;
 
     public Lesson() {
         this.isAvailable = Boolean.TRUE;
         this.studentsID = new ArrayList<>();
+        this.reviewsID = new ArrayList<>();
     }
 
     /**
@@ -108,17 +109,17 @@ public class Lesson {
     }
 
     /**
-     * @return the ReviewID
+     * @return the ReviewsID
      */
-    public ArrayList<Integer> getReviewID() {
-        return ReviewID;
+    public ArrayList<Integer> getReviewsID() {
+        return reviewsID;
     }
 
     /**
-     * @param ReviewID the ReviewID to set
+     * @param ReviewsID the ReviewsID to set
      */
-    public void setReviewID(ArrayList<Integer> ReviewID) {
-        this.ReviewID = ReviewID;
+    public void setReviewsID(ArrayList<Integer> reviewsID) {
+        this.reviewsID = reviewsID;
     }
 
     /**
