@@ -62,10 +62,10 @@ class AppFlow {
         }
         selection = console.studentMenuShow(studentID);
         if (1 == selection) {
-            bookSession(studentID);
+            bookLesson(studentID);
         }
         if (2 == selection) {
-            cancelSession(studentID);
+            cancelLesson(studentID);
         }
         if (3 == selection) {
             reviewSession(studentID);
@@ -92,7 +92,7 @@ class AppFlow {
         this.console = new ConsoleUI();
     }
 
-    private void bookSession(int studentID) {
+    private void bookLesson(int studentID) {
         int selection;
         Lesson tempLesson = new Lesson();
         DataSingleton.LessonStatus addStatus;
@@ -128,7 +128,7 @@ class AppFlow {
         instance.printLessons();
     }
 
-    private void cancelSession(int studentID) {
+    private void cancelLesson(int studentID) {
         DataSingleton instance = DataSingleton.getInstance();
         ArrayList<Lesson> lessonsBookedByStudent = null;
         Lesson lesson;
