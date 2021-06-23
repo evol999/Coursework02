@@ -39,7 +39,7 @@ public interface StepsInterface {
 
     public void alreadyBooked(Lesson tempLesson);
 
-    public int selectFromBookedLessons(int studentID, ArrayList<Lesson> lessonsBookedByStudent);
+    public Lesson selectFromBookedLessons(int studentID, ArrayList<Lesson> lessonsBookedByStudent);
 
     public int confirmation();
 

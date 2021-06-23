@@ -228,13 +228,14 @@ public class ConsoleUI implements StepsInterface {
     }
 
     @Override
-    public int selectFromBookedLessons(int studentID, ArrayList<Lesson> lessonsBookedByStudent) {
-        int retVal;
+    public Lesson selectFromBookedLessons(int studentID, ArrayList<Lesson> lessonsBookedByStudent) {
+        Lesson retVal;
         DataSingleton instance = DataSingleton.getInstance();
         String name;
         String subject;
         String date;
         String session;
+        int selection;
 
         name = instance.getStudentNameByID(studentID);
         menuUser.reset();
@@ -250,8 +251,8 @@ public class ConsoleUI implements StepsInterface {
             menuUser.setOption(date + " " + subject + " in the " + session + ".");
         }
 
-        retVal = menuUser.runMenu();
-        return lessonsBookedByStudent.get(retVal - 1).getLessonID();
+        selection = menuUser.runMenu();
+        return lessonsBookedByStudent.get(selection - 1);
     }
 
     @Override

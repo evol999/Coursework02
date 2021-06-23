@@ -128,16 +128,16 @@ class AppFlow {
     private void cancelSession(int studentID) {
         DataSingleton instance = DataSingleton.getInstance();
         ArrayList<Lesson> lessonsBookedByStudent = null;
-        int lessonID;
+        Lesson lesson;
         int selection;
 
         lessonsBookedByStudent = instance.getLessonsBookedByStudentID(studentID);
 
         if (0 != lessonsBookedByStudent.size()) {
-            lessonID = console.selectFromBookedLessons(studentID, lessonsBookedByStudent);
+            lesson = console.selectFromBookedLessons(studentID, lessonsBookedByStudent);
             selection = console.confirmation();
             if (1 == selection) {
-                instance.cancelLesson(lessonID, studentID);
+                instance.cancelLesson(lesson.getLessonID(), studentID);
                 console.cancellationSuccess();
             } else {
                 console.cancelNotDone();
