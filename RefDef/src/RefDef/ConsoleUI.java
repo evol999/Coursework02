@@ -318,4 +318,81 @@ public class ConsoleUI implements StepsInterface {
         }
         menuUser.runDisplayText();
     }
+
+    int selectNumericalRatingReview() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("NUMERICAL RATING");
+        menuUser.setText("Please provide a numerical rating of the lesson");
+        menuUser.setOption("Very dissatisfied");    //  1.
+        menuUser.setOption("Dissatisfied");         //  2.
+        menuUser.setOption("OK");                   //  3.
+        menuUser.setOption("Satisfied");            //  4.
+        menuUser.setOption("Very satisfied");       //  5.
+        menuUser.runMenu();
+        return menuUser.getSelection();
+
+    }
+
+    String enterWrittenReview() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("LESSON REVIEW INPUT");
+        menuUser.setText("Please enter your review:");
+        menuUser.runTextCapture();
+        return menuUser.getCapturedText();
+    }
+
+    int warningReviewExist(Review review, Lesson lesson) {
+        DataSingleton instance = DataSingleton.getInstance();
+        String subject;
+        String date;
+        String session;
+
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("WARNING REVIEW ALREADY EXISTS");
+        subject = instance.getSubjectNameByID(lesson.getLessonID());
+        date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.SHORT);
+        session = instance.getSessionAsText(lesson.getSession());
+        session = session.toLowerCase();
+        menuUser.setText(date + " " + subject + " in the " + session + ".");
+        menuUser.setText("By continuing you will overwerite your previous review");
+        menuUser.setText("This is your previous review:");
+        menuUser.setText("Numerical rating: " + review.getNumericalRating());
+        menuUser.setText("Written review: " + review.getWrittenReview());
+        menuUser.setText("Do you wish to continue?");
+
+        menuUser.setOption("Yes");
+        menuUser.setOption("No");
+
+        menuUser.runMenu();
+        return menuUser.getSelection();
+    }
+
+    void reviewUpdated() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("YOUR REVIEW HAS BEEN UPDATED");
+
+        menuUser.runDisplayText();
+
+    }
+
+    void reviewAdded() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("YOUR REVIEW HAS BEEN ADDED");
+
+        menuUser.runDisplayText();
+    }
+
+    void cannotBeCancelled() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("CANNOT BE CANCEL");
+        menuUser.setText("Once a lesson is reviewed, the lesson cannot be cancel");
+
+        menuUser.runDisplayText();
+    }
 }

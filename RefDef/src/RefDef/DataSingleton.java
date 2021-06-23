@@ -28,12 +28,14 @@ public class DataSingleton {
     private ArrayList<Subject> subjects;
     private ArrayList<WorkingDate> workingDates;
     private ArrayList<Lesson> lessons;
+    private ArrayList<Review> reviews;
 
     private DataSingleton() {
         students = new ArrayList<>();
         subjects = new ArrayList<>();
         workingDates = new ArrayList<>();
         lessons = new ArrayList<>();
+        reviews = new ArrayList<>();
         initBaseDate();
         initWorkingDates();
     }
@@ -292,6 +294,99 @@ public class DataSingleton {
         lesson.setIsAvailable(Boolean.TRUE);
     }
 
+    void addReview(Review tempReview) {
+        String signature;
+        int reviewID;
+
+//        signature = generateReviewSignature(tempReview);
+        signature = tempReview.getSignature();
+        reviewID = findReviewIDbySignature(signature);
+
+        if (0 == reviewID) {
+            tempReview.setReviewID(getNewReviewID());
+//            tempReview.setSignature(signature);
+            reviews.add(tempReview);
+        } else {
+            tempReview.setReviewID(reviewID);
+            updateReview(tempReview);
+        }
+
+//        tempReview.setSignature(signature);
+
+        return;
+    }
+
+    private String generateReviewSignature(Review review) {
+        String retVal;
+        int id;
+
+        id = review.getLessonID();
+        retVal = String.format("%03d", id);
+        id = review.getStudentID();
+        retVal += String.format("%03d", id);
+        return retVal;
+    }
+
+    private int findReviewIDbySignature(String signature) {
+        int retVal = 0;
+        for (Review review : getReviews()) {
+            if (review.getSignature().equals(signature)) {
+                retVal = review.getReviewID();
+                break;
+            }
+        }
+        return retVal;
+
+    }
+
+    private int getNewReviewID() {
+        return getReviews().size() + 1;
+    }
+
+    boolean checkReviewExistance(Review review) {
+        boolean retVal = Boolean.FALSE;
+        String signature;
+        String writtenReview;
+        int reviewID;
+        int numericalRating;
+        Review existingReview;
+
+        signature = generateReviewSignature(review);
+        review.setSignature(signature);
+
+        reviewID = findReviewIDbySignature(signature);
+
+        if (0 != reviewID) {
+            existingReview = getReviewByID(reviewID);
+            review.setWrittenReview(existingReview.getWrittenReview());
+            review.setNumericalRating(existingReview.getNumericalRating());
+            retVal = Boolean.TRUE;
+        }
+
+        return retVal;
+    }
+
+    private Review getReviewByID(int reviewID) {
+        Review retVal = null;
+
+        for (Review review : reviews) {
+            if (review.getReviewID() == reviewID) {
+                retVal = review;
+                break;
+            }
+
+        }
+        return retVal;
+    }
+
+    private void updateReview(Review review) {
+        Review storedReview;
+
+        storedReview = getReviewByID(review.getReviewID());
+        storedReview.setWrittenReview(review.getWrittenReview());
+        storedReview.setNumericalRating(review.getNumericalRating());
+    }
+
     public enum Session {
         MORNING,
         AFTERNOON,
@@ -341,6 +436,20 @@ public class DataSingleton {
             }
             return null;
         }
+    }
+
+    /**
+     * @return the reviews
+     */
+    public ArrayList<Review> getReviews() {
+        return reviews;
+    }
+
+    /**
+     * @param reviews the reviews to set
+     */
+    public void setReviews(ArrayList<Review> reviews) {
+        this.reviews = reviews;
     }
 
 }

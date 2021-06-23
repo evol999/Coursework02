@@ -67,6 +67,9 @@ class AppFlow {
         if (2 == selection) {
             cancelSession(studentID);
         }
+        if (3 == selection) {
+            reviewSession(studentID);
+        }
         if (4 == selection) {
             showBookedSessions(studentID);
         }
@@ -135,14 +138,17 @@ class AppFlow {
 
         if (0 != lessonsBookedByStudent.size()) {
             lesson = console.selectFromBookedLessons(studentID, lessonsBookedByStudent);
-            selection = console.confirmation();
-            if (1 == selection) {
-                instance.cancelLesson(lesson.getLessonID(), studentID);
-                console.cancellationSuccess();
+            if (0 != lesson.getReviewsID().size()) {
+                selection = console.confirmation();
+                if (1 == selection) {
+                    instance.cancelLesson(lesson.getLessonID(), studentID);
+                    console.cancellationSuccess();
+                } else {
+                    console.cancelNotDone();
+                }
             } else {
-                console.cancelNotDone();
+                console.cannotBeCancelled();
             }
-
         } else {
             console.noLessonsBooked();
         }
@@ -160,6 +166,49 @@ class AppFlow {
         } else {
             console.noLessonsBooked();
         }
+    }
+
+    private void reviewSession(int studentID) {
+        int selection;
+        Review tempReview = new Review();
+        DataSingleton.LessonStatus addStatus;
+        ArrayList<Lesson> lessonsBookedByStudent = null;
+        DataSingleton instance = DataSingleton.getInstance();
+        String writtenReview;
+        boolean alreadyExist;
+        Lesson lesson;
+
+        tempReview.setStudentID(studentID);
+        lessonsBookedByStudent = instance.getLessonsBookedByStudentID(studentID);
+        if (0 == lessonsBookedByStudent.size()) {
+            console.noLessonsBooked();
+            return;
+        }
+        lesson = console.selectFromBookedLessons(studentID, lessonsBookedByStudent);
+        tempReview.setLessonID(lesson.getLessonID());
+
+        alreadyExist = instance.checkReviewExistance(tempReview);
+
+        if (alreadyExist) {
+            selection = console.warningReviewExist(tempReview, lesson);
+            if (2 == selection) {
+                return;
+            }
+        }
+
+        selection = console.selectNumericalRatingReview();
+        tempReview.setNumericalRating(selection);
+        writtenReview = console.enterWrittenReview();
+        tempReview.setWrittenReview(writtenReview);
+
+        instance.addReview(tempReview);
+
+        if (alreadyExist) {
+            console.reviewUpdated();
+        } else {
+            console.reviewAdded();
+        }
+
     }
 
 }
