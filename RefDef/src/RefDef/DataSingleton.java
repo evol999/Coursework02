@@ -288,7 +288,6 @@ public class DataSingleton {
         lesson = getLessonByID(lessonID);
         studentIndex = lesson.getStudentsID().indexOf(studentID);
         lesson.getStudentsID().remove(studentIndex);
-        lesson.setIsAvailable(Boolean.TRUE);
     }
 
     void addReview(Review tempReview) {

@@ -84,14 +84,15 @@ public class Lesson {
      * @return the isAvailable
      */
     public Boolean getIsAvailable() {
-        return isAvailable;
-    }
+        boolean retVal;
 
-    /**
-     * @param isAvailable the isAvailable to set
-     */
-    public void setIsAvailable(Boolean isAvailable) {
-        this.isAvailable = isAvailable;
+        if (studentsID.size() < maxStudents) {
+            retVal = Boolean.TRUE;
+        } else {
+            retVal = Boolean.FALSE;
+        }
+
+        return retVal;
     }
 
     /**
@@ -141,9 +142,6 @@ public class Lesson {
 
         if (getIsAvailable()) {
             studentsID.add(studentID);
-            if (studentsID.size() == maxStudents) {
-                setIsAvailable(Boolean.FALSE);
-            }
         } else
             retVal = Boolean.FALSE;
         return retVal;
