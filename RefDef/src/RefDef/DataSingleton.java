@@ -113,24 +113,24 @@ public class DataSingleton {
 
     LessonStatus addLesson(Lesson tempLesson) {
         String signature;
-        LessonStatus retVal = LessonStatus.SUCCESS;
+        LessonStatus retVal;
         int lessonID;
 
         signature = generateLessonSignature(tempLesson);
         lessonID = findLessonIDbySignature(signature);
 
+//        retVal = checkForTimeConflict();
+//        if (retVal != LessonStatus.TIME_CONFLICT) {
+        tempLesson.setSignature(signature);
         if (0 == lessonID) {
             tempLesson.setLessonID(getNewLessonID());
-            tempLesson.setSignature(signature);
             lessons.add(tempLesson);
+            retVal = LessonStatus.SUCCESS;
         } else {
             tempLesson.setLessonID(lessonID);
             retVal = addStudentToLesson(lessonID, tempLesson.getStudentsID().get(0));
         }
-
-
-        tempLesson.setSignature(signature);
-
+//        }
         return retVal;
 
     }
@@ -156,9 +156,9 @@ public class DataSingleton {
 
         id = lesson.getDateID();
         retVal = getLessonDateAsTextByID(id, DateFormat.SHORT);
-        id = lesson.getSubjectID();
-        retVal += String.format("%03d", id);
         id = lesson.getSession().ordinal();
+        retVal += String.format("%03d", id);
+        id = lesson.getSubjectID();
         retVal += String.format("%03d", id);
         return retVal;
     }
@@ -405,7 +405,8 @@ public class DataSingleton {
     public enum LessonStatus {
         SUCCESS,
         NOT_EMPTY_SEATS,
-        ALREADY_BOOKED;
+        ALREADY_BOOKED,
+        TIME_CONFLICT;
 
         public static LessonStatus fromInteger(int x) {
             switch (x) {
@@ -415,6 +416,8 @@ public class DataSingleton {
                     return NOT_EMPTY_SEATS;
                 case 3:
                     return ALREADY_BOOKED;
+                case 4:
+                    return TIME_CONFLICT;
             }
             return null;
         }
