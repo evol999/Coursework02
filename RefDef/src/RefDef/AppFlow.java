@@ -117,6 +117,9 @@ class AppFlow {
                 case ALREADY_BOOKED:
                     console.alreadyBooked(tempLesson);
                     break;
+                case TIME_CONFLICT:
+                    console.timeConflict(tempLesson);
+                    break;
                 default:
                     break;
             }

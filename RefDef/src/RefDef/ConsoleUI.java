@@ -395,4 +395,25 @@ public class ConsoleUI implements StepsInterface {
 
         menuUser.runDisplayText();
     }
+
+    void timeConflict(Lesson lesson) {
+        DataSingleton instance = DataSingleton.getInstance();
+        String name;
+        String subject;
+        String date;
+        String session;
+
+        name = instance.getStudentNameByID(lesson.getStudentsID().get(0));
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("TIME CONFLICT");
+        menuUser.setText(name + " you have a conflict with the following lesson:");
+
+        subject = instance.getSubjectNameByID(lesson.getLessonID());
+        date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.SHORT);
+        session = instance.getSessionAsText(lesson.getSession());
+        session = session.toLowerCase();
+        menuUser.setText(date + " " + subject + " in the " + session + ".");
+        menuUser.runDisplayText();
+    }
 }

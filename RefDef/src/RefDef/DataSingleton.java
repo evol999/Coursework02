@@ -117,20 +117,19 @@ public class DataSingleton {
         int lessonID;
 
         signature = generateLessonSignature(tempLesson);
-        lessonID = findLessonIDbySignature(signature);
-
-//        retVal = checkForTimeConflict();
-//        if (retVal != LessonStatus.TIME_CONFLICT) {
         tempLesson.setSignature(signature);
-        if (0 == lessonID) {
-            tempLesson.setLessonID(getNewLessonID());
-            lessons.add(tempLesson);
-            retVal = LessonStatus.SUCCESS;
-        } else {
-            tempLesson.setLessonID(lessonID);
-            retVal = addStudentToLesson(lessonID, tempLesson.getStudentsID().get(0));
+
+        retVal = checkForTimeConflicts(tempLesson, tempLesson.getStudentsID().get(0));
+        if (retVal == LessonStatus.SUCCESS) {
+            lessonID = findLessonIDbySignature(signature);
+            if (0 == lessonID) {
+                tempLesson.setLessonID(getNewLessonID());
+                lessons.add(tempLesson);
+            } else {
+                tempLesson.setLessonID(lessonID);
+                retVal = addStudentToLesson(lessonID, tempLesson.getStudentsID().get(0));
+            }
         }
-//        }
         return retVal;
 
     }
@@ -195,9 +194,7 @@ public class DataSingleton {
 
         Lesson tempLesson = getLessonByID(lessonID);
 
-        if (tempLesson.getStudentsID().indexOf(studentID) != -1) {
-            retVal = LessonStatus.ALREADY_BOOKED;
-        } else if (!tempLesson.getIsAvailable()) {
+        if (!tempLesson.getIsAvailable()) {
                 retVal = LessonStatus.NOT_EMPTY_SEATS;
         } else {
             tempLesson.addStudentID(studentID);
@@ -381,6 +378,31 @@ public class DataSingleton {
         storedReview = getReviewByID(review.getReviewID());
         storedReview.setWrittenReview(review.getWrittenReview());
         storedReview.setNumericalRating(review.getNumericalRating());
+    }
+
+    private LessonStatus checkForTimeConflicts(Lesson lesson, Integer studentID) {
+        LessonStatus retVal = LessonStatus.SUCCESS;
+        String subSignatureRecord;
+        String subSignatureNew;
+
+        for (Lesson tempLesson : lessons) {
+            if (-1 != tempLesson.getStudentsID().indexOf(studentID)) {
+                if (lesson.getSignature().equals(tempLesson.getSignature())) {
+                    lesson.setLessonID(tempLesson.getLessonID());
+                    retVal = LessonStatus.ALREADY_BOOKED;
+                    break;
+                } else {
+                    subSignatureRecord = tempLesson.getSignature().substring(0, 13);
+                    subSignatureNew = lesson.getSignature().substring(0, 13);
+                    if (subSignatureRecord.equals(subSignatureNew)) {
+                        lesson.setLessonID(tempLesson.getLessonID());
+                        retVal = LessonStatus.TIME_CONFLICT;
+                        break;
+                    }
+                }
+            }
+        }
+        return retVal;
     }
 
     public enum Session {
