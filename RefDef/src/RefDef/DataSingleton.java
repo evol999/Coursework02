@@ -115,7 +115,7 @@ public class DataSingleton {
         int lessonID;
 
         signature = generateLessonSignature(tempLesson);
-        lessonID = searchLessonIDbySignature(signature);
+        lessonID = findLessonIDbySignature(signature);
 
         if (0 == lessonID) {
             tempLesson.setLessonID(getNewLessonID());
@@ -133,7 +133,7 @@ public class DataSingleton {
 
     }
 
-    private int searchLessonIDbySignature(String signature) {
+    private int findLessonIDbySignature(String signature) {
         int retVal = 0;
         for (Lesson lesson : getLessons()) {
             if (lesson.getSignature().equals(signature)) {
