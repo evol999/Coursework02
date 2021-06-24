@@ -141,7 +141,7 @@ public class Lesson {
     Boolean addStudentID(int studentID) {
         Boolean retVal = Boolean.TRUE;
 
-        if (getIsAvailable()) {
+        if (getIsAvailable() && (-1 == studentsID.indexOf(studentID))) {
             studentsID.add(studentID);
         } else
             retVal = Boolean.FALSE;
