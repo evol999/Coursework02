@@ -65,10 +65,10 @@ class AppFlow {
             bookLesson(studentID);
         }
         if (2 == selection) {
-            cancelLesson(studentID);
+            editLesson(studentID);
         }
         if (3 == selection) {
-            editLesson(studentID);
+            cancelLesson(studentID);
         }
         if (4 == selection) {
             reviewLesson(studentID);

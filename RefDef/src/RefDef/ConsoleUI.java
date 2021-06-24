@@ -72,9 +72,10 @@ public class ConsoleUI implements StepsInterface {
         menuUser.setText("STUDENT MENU");
         menuUser.setText(greeting);
         menuUser.setOption("Book session");         //  1.
-        menuUser.setOption("Cancel session");       //  2.
-        menuUser.setOption("Review session");       //  3.
-        menuUser.setOption("See booked sessions");  //  4.
+        menuUser.setOption("Edit session");         //  2.
+        menuUser.setOption("Cancel session");       //  3.
+        menuUser.setOption("Review session");       //  4.
+        menuUser.setOption("See booked sessions");  //  5.
         menuUser.runMenu();
         return menuUser.getSelection();
 
