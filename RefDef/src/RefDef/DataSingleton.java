@@ -281,10 +281,17 @@ public class DataSingleton {
     void cancelLesson(int lessonID, int studentID) {
         Lesson lesson;
         int studentIndex;
+        int lessonIndex;
 
         lesson = getLessonByID(lessonID);
         studentIndex = lesson.getStudentsID().indexOf(studentID);
         lesson.getStudentsID().remove(studentIndex);
+        if (0 == lesson.getStudentsID().size()) {
+            lessonIndex = getLessons().indexOf(lesson);
+            if (-1 != lessonIndex) {
+                getLessons().remove(lessonIndex);
+            }
+        }
     }
 
     void addReview(Review tempReview) {
