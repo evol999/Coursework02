@@ -141,7 +141,7 @@ class AppFlow {
 
         if (0 != lessonsBookedByStudent.size()) {
             lesson = console.selectFromBookedLessons(studentID, lessonsBookedByStudent);
-            if (0 != lesson.getReviewsID().size()) {
+            if (0 == lesson.getReviewsID().size()) {
                 selection = console.confirmation();
                 if (1 == selection) {
                     instance.cancelLesson(lesson.getLessonID(), studentID);
