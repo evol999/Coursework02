@@ -220,18 +220,46 @@ class AppFlow {
     private void editLesson(int studentID) {
         DataSingleton instance = DataSingleton.getInstance();
         ArrayList<Lesson> lessonsBookedByStudent = null;
-        Lesson lesson;
+        Lesson oldLesson;
+        Lesson newLesson;
         int selection;
+        DataSingleton.LessonStatus editStatus;
 
         lessonsBookedByStudent = instance.getLessonsBookedByStudentID(studentID);
 
         if (0 != lessonsBookedByStudent.size()) {
-            lesson = console.selectFromBookedLessons(studentID, lessonsBookedByStudent);
-            if (0 == lesson.getReviewsID().size()) {
+            oldLesson = console.selectFromBookedLessons(studentID, lessonsBookedByStudent);
+            if (0 == oldLesson.getReviewsID().size()) {
                 selection = console.confirmation();
                 if (1 == selection) {
-                    instance.cancelLesson(lesson.getLessonID(), studentID);
-                    console.cancellationSuccess();
+                    newLesson = new Lesson();
+                    newLesson.addStudentID(studentID);
+                    newLesson.setSubjectID(oldLesson.getSubjectID());
+                    selection = console.selectDate();
+                    newLesson.setDateID(selection);
+                    selection = console.selectSession();
+                    newLesson.setSession(Session.fromInteger(selection));
+                    editStatus = instance.editLesson(oldLesson, newLesson);
+
+                    if (null != editStatus) {
+                        switch (editStatus) {
+                            case SUCCESS:
+                                console.cancellationSuccess();
+                                console.bookSuccess(newLesson);
+                                break;
+                            case NOT_EMPTY_SEATS:
+                                console.notEmpty(newLesson);
+                                break;
+                            case ALREADY_BOOKED:
+                                console.alreadyBooked(newLesson);
+                                break;
+                            case TIME_CONFLICT:
+                                console.timeConflict(newLesson);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 } else {
                     console.cancelNotDone();
                 }

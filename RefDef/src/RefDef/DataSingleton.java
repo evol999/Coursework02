@@ -413,6 +413,16 @@ public class DataSingleton {
         return retVal;
     }
 
+    LessonStatus editLesson(Lesson oldLesson, Lesson newLesson) {
+        LessonStatus retVal;
+
+        retVal = addLesson(newLesson);
+        if (LessonStatus.SUCCESS == retVal) {
+            cancelLesson(oldLesson.getLessonID(), newLesson.getStudentsID().get(0));
+        }
+        return retVal;
+    }
+
     public enum Session {
         MORNING,
         AFTERNOON,

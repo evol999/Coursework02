@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -344,6 +345,200 @@ public class DataSingletonTest {
         instance.setReviews(reviews);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of editLesson method, of class DataSingleton.
+     */
+    @Test
+    public void testEditLesson() {
+        System.out.println("editLesson");
+        DataSingleton instance = DataSingleton.getInstance();
+        Initialize init = new Initialize();
+
+        int lessonID = 0;
+        int studentID = 0;
+        Lesson oldLesson = new Lesson();
+        Lesson newLesson = new Lesson();
+
+        instance.getLessons().clear();
+
+        oldLesson.addStudentID(1);
+        oldLesson.setDateID(11);
+        oldLesson.setSession(DataSingleton.Session.MORNING);
+        oldLesson.setSubjectID(1);
+
+        DataSingleton.LessonStatus expResult = DataSingleton.LessonStatus.SUCCESS;
+        DataSingleton.LessonStatus result = instance.addLesson(oldLesson);
+        assertEquals(expResult, result);
+        int lessonCountOld = instance.getLessons().size();
+
+        System.out.println("edit date");
+        newLesson.addStudentID(1);
+        newLesson.setDateID(10);
+        newLesson.setSession(DataSingleton.Session.MORNING);
+        newLesson.setSubjectID(1);
+        expResult = DataSingleton.LessonStatus.SUCCESS;
+        result = instance.editLesson(oldLesson, newLesson);
+        assertEquals(expResult, result);
+
+        int lessonCountNew = instance.getLessons().size();
+        assertEquals(lessonCountOld, lessonCountNew);
+        assertNotEquals(oldLesson.getDateID(), newLesson.getDateID());
+        assertEquals(oldLesson.getSession(), newLesson.getSession());
+        assertEquals(oldLesson.getSubjectID(), newLesson.getSubjectID());
+        lessonCountOld = instance.getLessons().size();
+
+        System.out.println("edit session");
+        oldLesson = newLesson;
+        newLesson = new Lesson();
+        newLesson.addStudentID(1);
+        newLesson.setDateID(10);
+        newLesson.setSession(DataSingleton.Session.AFTERNOON);
+        newLesson.setSubjectID(1);
+        expResult = DataSingleton.LessonStatus.SUCCESS;
+        result = instance.editLesson(oldLesson, newLesson);
+        assertEquals(expResult, result);
+        lessonCountNew = instance.getLessons().size();
+
+        assertEquals(lessonCountOld, lessonCountNew);
+        assertEquals(oldLesson.getDateID(), newLesson.getDateID());
+        assertNotEquals(oldLesson.getSession(), newLesson.getSession());
+        assertEquals(oldLesson.getSubjectID(), newLesson.getSubjectID());
+
+        System.out.println("keep students from previous lesson");
+        instance.getLessons().clear();
+        oldLesson = new Lesson();
+        newLesson = new Lesson();
+
+        oldLesson.addStudentID(1);
+        oldLesson.setDateID(10);
+        oldLesson.setSession(DataSingleton.Session.MORNING);
+        oldLesson.setSubjectID(1);
+
+        oldLesson.addStudentID(2);
+        oldLesson.addStudentID(3);
+        oldLesson.addStudentID(4);
+
+        expResult = DataSingleton.LessonStatus.SUCCESS;
+        result = instance.addLesson(oldLesson);
+        assertEquals(expResult, result);
+
+        newLesson.addStudentID(1);
+        newLesson.setDateID(11);
+        newLesson.setSession(DataSingleton.Session.MORNING);
+        newLesson.setSubjectID(1);
+
+        expResult = DataSingleton.LessonStatus.SUCCESS;
+        result = instance.editLesson(oldLesson, newLesson);
+        assertEquals(expResult, result);
+        assertEquals(oldLesson.getStudentsID().size(), 3);
+        assertEquals(oldLesson.getStudentsID().indexOf(1), -1);
+        assertEquals(newLesson.getStudentsID().indexOf(1), 0);
+
+        System.out.println("Already Booked");
+        instance.getLessons().clear();
+        oldLesson = new Lesson();
+        newLesson = new Lesson();
+
+        oldLesson.addStudentID(1);
+        oldLesson.setDateID(10);
+        oldLesson.setSession(DataSingleton.Session.MORNING);
+        oldLesson.setSubjectID(1);
+
+        expResult = DataSingleton.LessonStatus.SUCCESS;
+        result = instance.addLesson(oldLesson);
+        assertEquals(expResult, result);
+
+        oldLesson = new Lesson();
+        oldLesson.addStudentID(1);
+        oldLesson.setDateID(11);
+        oldLesson.setSession(DataSingleton.Session.MORNING);
+        oldLesson.setSubjectID(4);
+
+        expResult = DataSingleton.LessonStatus.SUCCESS;
+        result = instance.addLesson(oldLesson);
+        assertEquals(expResult, result);
+
+        newLesson.addStudentID(1);
+        newLesson.setDateID(10);
+        newLesson.setSession(DataSingleton.Session.MORNING);
+        newLesson.setSubjectID(1);
+
+        expResult = DataSingleton.LessonStatus.ALREADY_BOOKED;
+        result = instance.editLesson(oldLesson, newLesson);
+        assertEquals(expResult, result);
+
+        System.out.println("Time conflict");
+        instance.getLessons().clear();
+        oldLesson = new Lesson();
+        newLesson = new Lesson();
+
+        oldLesson.addStudentID(1);
+        oldLesson.setDateID(10);
+        oldLesson.setSession(DataSingleton.Session.MORNING);
+        oldLesson.setSubjectID(1);
+
+        expResult = DataSingleton.LessonStatus.SUCCESS;
+        result = instance.addLesson(oldLesson);
+        assertEquals(expResult, result);
+
+        oldLesson = new Lesson();
+        oldLesson.addStudentID(1);
+        oldLesson.setDateID(11);
+        oldLesson.setSession(DataSingleton.Session.MORNING);
+        oldLesson.setSubjectID(4);
+
+        expResult = DataSingleton.LessonStatus.SUCCESS;
+        result = instance.addLesson(oldLesson);
+        assertEquals(expResult, result);
+
+        newLesson.addStudentID(1);
+        newLesson.setDateID(10);
+        newLesson.setSession(DataSingleton.Session.MORNING);
+        newLesson.setSubjectID(3);
+
+        expResult = DataSingleton.LessonStatus.TIME_CONFLICT;
+        result = instance.editLesson(oldLesson, newLesson);
+        assertEquals(expResult, result);
+
+        System.out.println("No empty seats");
+        instance.getLessons().clear();
+        oldLesson = new Lesson();
+        newLesson = new Lesson();
+
+        oldLesson.addStudentID(1);
+        oldLesson.setDateID(10);
+        oldLesson.setSession(DataSingleton.Session.MORNING);
+        oldLesson.setSubjectID(1);
+
+        oldLesson.addStudentID(2);
+        oldLesson.addStudentID(3);
+        oldLesson.addStudentID(4);
+
+        expResult = DataSingleton.LessonStatus.SUCCESS;
+        result = instance.addLesson(oldLesson);
+        assertEquals(expResult, result);
+
+        oldLesson = new Lesson();
+        oldLesson.addStudentID(1);
+        oldLesson.setDateID(11);
+        oldLesson.setSession(DataSingleton.Session.MORNING);
+        oldLesson.setSubjectID(4);
+
+        expResult = DataSingleton.LessonStatus.SUCCESS;
+        result = instance.addLesson(oldLesson);
+        assertEquals(expResult, result);
+
+        newLesson.addStudentID(5);
+        newLesson.setDateID(10);
+        newLesson.setSession(DataSingleton.Session.MORNING);
+        newLesson.setSubjectID(1);
+
+        expResult = DataSingleton.LessonStatus.NOT_EMPTY_SEATS;
+        result = instance.editLesson(oldLesson, newLesson);
+        assertEquals(expResult, result);
+
     }
 
 }
