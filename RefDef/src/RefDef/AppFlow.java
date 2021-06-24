@@ -68,10 +68,13 @@ class AppFlow {
             cancelLesson(studentID);
         }
         if (3 == selection) {
-            reviewSession(studentID);
+            editLesson(studentID);
         }
         if (4 == selection) {
-            showBookedSessions(studentID);
+            reviewLesson(studentID);
+        }
+        if (5 == selection) {
+            showBookedLesson(studentID);
         }
 
     }
@@ -158,7 +161,7 @@ class AppFlow {
 
     }
 
-    private void showBookedSessions(int studentID) {
+    private void showBookedLesson(int studentID) {
         DataSingleton instance = DataSingleton.getInstance();
         ArrayList<Lesson> lessonsBookedByStudent = null;
 
@@ -171,7 +174,7 @@ class AppFlow {
         }
     }
 
-    private void reviewSession(int studentID) {
+    private void reviewLesson(int studentID) {
         int selection;
         Review tempReview = new Review();
         DataSingleton.LessonStatus addStatus;
