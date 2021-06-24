@@ -146,7 +146,8 @@ public class DataSingleton {
     }
 
     private int getNewLessonID() {
-        return getLessons().size() + 1;
+        Lesson.increaseUniqueIDcounter();
+        return Lesson.getUniqueIDcounter();
     }
 
     String generateLessonSignature(Lesson lesson) {

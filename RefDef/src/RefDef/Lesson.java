@@ -24,6 +24,7 @@ public class Lesson {
     private ArrayList<Integer> reviewsID;
     private double averageRating;
     private String signature;
+    private static int uniqueIDcounter = 0;
 
     public Lesson() {
         this.isAvailable = Boolean.TRUE;
@@ -181,6 +182,20 @@ public class Lesson {
             retVal = Boolean.TRUE;
         }
         return retVal;
+    }
+
+    /**
+     * @return the uniqueIDcounter
+     */
+    public static int getUniqueIDcounter() {
+        return uniqueIDcounter;
+    }
+
+    /**
+     * @return inscreased uniqueIDcounter
+     */
+    public static void increaseUniqueIDcounter() {
+        uniqueIDcounter++;
     }
 
 }

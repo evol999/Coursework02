@@ -217,4 +217,30 @@ class AppFlow {
 
     }
 
+    private void editLesson(int studentID) {
+        DataSingleton instance = DataSingleton.getInstance();
+        ArrayList<Lesson> lessonsBookedByStudent = null;
+        Lesson lesson;
+        int selection;
+
+        lessonsBookedByStudent = instance.getLessonsBookedByStudentID(studentID);
+
+        if (0 != lessonsBookedByStudent.size()) {
+            lesson = console.selectFromBookedLessons(studentID, lessonsBookedByStudent);
+            if (0 == lesson.getReviewsID().size()) {
+                selection = console.confirmation();
+                if (1 == selection) {
+                    instance.cancelLesson(lesson.getLessonID(), studentID);
+                    console.cancellationSuccess();
+                } else {
+                    console.cancelNotDone();
+                }
+            } else {
+                console.cannotBeCancelled();
+            }
+        } else {
+            console.noLessonsBooked();
+        }
+    }
+
 }
