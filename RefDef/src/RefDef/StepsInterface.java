@@ -47,4 +47,23 @@ public interface StepsInterface {
 
     public void cancelNotDone();
 
+    public void noLessonsBooked();
+
+    public void showBookedLessons(int studentID, ArrayList<Lesson> lessonsBookedByStudent);
+
+    public int selectNumericalRatingReview();
+
+    public String enterWrittenReview();
+
+    public int warningReviewExist(Review review, Lesson lesson);
+
+    public void reviewUpdated();
+
+    public void reviewAdded();
+
+    public void cannotBeCancelled();
+
+    public void timeConflict(Lesson lesson);
+
+    public int adminMenu();
 }

@@ -279,6 +279,7 @@ public class ConsoleUI implements StepsInterface {
 
     }
 
+    @Override
     public void cancelNotDone() {
         menuUser.reset();
         menuUser.setText("=================================");
@@ -288,7 +289,8 @@ public class ConsoleUI implements StepsInterface {
 
     }
 
-    void noLessonsBooked() {
+    @Override
+    public void noLessonsBooked() {
         menuUser.reset();
         menuUser.setText("=================================");
         menuUser.setText("STUDENT HAS NO LESSONS BOOKED");
@@ -297,7 +299,8 @@ public class ConsoleUI implements StepsInterface {
 
     }
 
-    void showBookedLessons(int studentID, ArrayList<Lesson> lessonsBookedByStudent) {
+    @Override
+    public void showBookedLessons(int studentID, ArrayList<Lesson> lessonsBookedByStudent) {
         DataSingleton instance = DataSingleton.getInstance();
         String name;
         String subject;
@@ -320,7 +323,8 @@ public class ConsoleUI implements StepsInterface {
         menuUser.runDisplayText();
     }
 
-    int selectNumericalRatingReview() {
+    @Override
+    public int selectNumericalRatingReview() {
         menuUser.reset();
         menuUser.setText("=================================");
         menuUser.setText("NUMERICAL RATING");
@@ -335,7 +339,8 @@ public class ConsoleUI implements StepsInterface {
 
     }
 
-    String enterWrittenReview() {
+    @Override
+    public String enterWrittenReview() {
         menuUser.reset();
         menuUser.setText("=================================");
         menuUser.setText("LESSON REVIEW INPUT");
@@ -344,7 +349,8 @@ public class ConsoleUI implements StepsInterface {
         return menuUser.getCapturedText();
     }
 
-    int warningReviewExist(Review review, Lesson lesson) {
+    @Override
+    public int warningReviewExist(Review review, Lesson lesson) {
         DataSingleton instance = DataSingleton.getInstance();
         String subject;
         String date;
@@ -371,7 +377,8 @@ public class ConsoleUI implements StepsInterface {
         return menuUser.getSelection();
     }
 
-    void reviewUpdated() {
+    @Override
+    public void reviewUpdated() {
         menuUser.reset();
         menuUser.setText("=================================");
         menuUser.setText("YOUR REVIEW HAS BEEN UPDATED");
@@ -380,7 +387,8 @@ public class ConsoleUI implements StepsInterface {
 
     }
 
-    void reviewAdded() {
+    @Override
+    public void reviewAdded() {
         menuUser.reset();
         menuUser.setText("=================================");
         menuUser.setText("YOUR REVIEW HAS BEEN ADDED");
@@ -388,7 +396,8 @@ public class ConsoleUI implements StepsInterface {
         menuUser.runDisplayText();
     }
 
-    void cannotBeCancelled() {
+    @Override
+    public void cannotBeCancelled() {
         menuUser.reset();
         menuUser.setText("=================================");
         menuUser.setText("CANNOT BE CANCEL");
@@ -397,7 +406,8 @@ public class ConsoleUI implements StepsInterface {
         menuUser.runDisplayText();
     }
 
-    void timeConflict(Lesson lesson) {
+    @Override
+    public void timeConflict(Lesson lesson) {
         DataSingleton instance = DataSingleton.getInstance();
         String name;
         String subject;
@@ -418,7 +428,8 @@ public class ConsoleUI implements StepsInterface {
         menuUser.runDisplayText();
     }
 
-    int adminMenu() {
+    @Override
+    public int adminMenu() {
         menuUser.reset();
         menuUser.setText("=================================");
         menuUser.setText("ADMIN MENU");
