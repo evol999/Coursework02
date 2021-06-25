@@ -132,6 +132,8 @@ public class DataSingletonTest {
         Initialize init = new Initialize();
         Lesson tempLessonNew;
 
+        instance.getLessons().clear();
+
         System.out.println("addLesson success");
         Lesson tempLesson = new Lesson();
         tempLesson.addStudentID(1);
