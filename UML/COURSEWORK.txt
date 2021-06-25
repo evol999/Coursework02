@@ -22,6 +22,9 @@ package classes <<Rectangle>> {
 		void addStudent(Student tempStudent);
 		public String getStudentNameByID(int id):
 		public String generateLessonSignature(Lesson lesson);
+		void printLessons();
+		public void printReportPerTuitionLesson();
+		void printReportHighestIncome();
 	}
 
 	class Lesson {
@@ -47,16 +50,35 @@ package classes <<Rectangle>> {
 	}
 	
 	class Student {
+		private int studentID;
+		private String name;
 	}
 
 	class Review {
+		private int reviewID;
+		private int lessonID;
+		private int studentID;
+		private int numericalRating;
+		private String writtenReview;
+		private String signature;
 	}
 
+	class WorkingDate {
+		private static LocalDateTime baseDate;
+		private int workingDateID;
+		private LocalDateTime date;
+		public static String formatDate(LocalDateTime date);
+		public static String formatDateShort(LocalDateTime date);
+	}
 	
-	DataSingleton o-- Lesson
-	'Members <|-- Physician
-	'Physician *- ExpertiseType
-	'TimeTable *- Appoinment
-	
+	DataSingleton "1" *-- "*" Lesson
+	DataSingleton "1" *-- "*" Subject
+	DataSingleton "1" *-- "*" Student
+	DataSingleton "1" *-- "*" Review
+	DataSingleton "1" *-- "*" WorkingDate
+	Lesson -- Subject
+	Lesson -- WorkingDate
+	Lesson -- Student
+	Lesson -- Review
 }
 @enduml
