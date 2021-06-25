@@ -159,10 +159,12 @@ public class Initialize {
                 tempLesson.addStudentID(Integer.parseInt(studentID));
             }
             property = prop.getProperty(keyString + "reviewsid");
-            String[] reviews = property.split(" ");
-            for (String reviewID : reviews) {
-                System.out.println("reviewID: " + reviewID);
-                tempLesson.addReviewID(Integer.parseInt(reviewID));
+            if (!property.isEmpty()) {
+                String[] reviews = property.split(" ");
+                for (String reviewID : reviews) {
+                    System.out.println("reviewID: " + reviewID);
+                    tempLesson.addReviewID(Integer.parseInt(reviewID));
+                }
             }
 
             tempLesson.setSignature(instance.generateLessonSignature(tempLesson));
