@@ -10,10 +10,18 @@ end legend
 
 
 package classes <<Rectangle>> {
-	class Subject {
-		Integer subjectID
-		String name
-		double price
+	class DataSingleton {
+		private static DataSingleton instance;
+		private ArrayList<WorkingDate> workingDates;
+		private ArrayList<Subject> subjects;
+		private ArrayList<Student> students;
+		private ArrayList<Lesson> lessons;
+		private ArrayList<Review> reviews;
+		private void initWorkingDates()
+		public static DataSingleton getInstance()
+		void addStudent(Student tempStudent)
+		public String getStudentNameByID(int id)
+		public String generateLessonSignature(Lesson lesson)
 	}
 
 	class Student {
