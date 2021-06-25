@@ -19,14 +19,12 @@ public class Lesson {
     private int subjectID;
     private int dateID;
     private Session session;
-    private Boolean isAvailable;
     private ArrayList<Integer> studentsID;
     private ArrayList<Integer> reviewsID;
     private String signature;
     private static int uniqueIDcounter = 0;
 
     public Lesson() {
-        this.isAvailable = Boolean.TRUE;
         this.studentsID = new ArrayList<>();
         this.reviewsID = new ArrayList<>();
     }
