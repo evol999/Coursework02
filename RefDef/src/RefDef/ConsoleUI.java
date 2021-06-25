@@ -28,7 +28,7 @@ public class ConsoleUI implements StepsInterface {
         menuUser.setOption("Student");  //  1.
         menuUser.setOption("Administrator");  //  2.
         menuUser.setOption("Exit");  //  3.
-        menuUser.setOption("Print lessons");  //  4.
+//        menuUser.setOption("Print lessons");  //  4.
         menuUser.runMenu();
         return menuUser.getSelection();
     }
@@ -416,5 +416,17 @@ public class ConsoleUI implements StepsInterface {
         session = session.toLowerCase();
         menuUser.setText(date + " " + subject + " in the " + session + ".");
         menuUser.runDisplayText();
+    }
+
+    int adminMenu() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("ADMIN MENU");
+        menuUser.setOption("Register student");  //  1.
+        menuUser.setOption("Print lessons");  //  2.
+        menuUser.setOption("Print report per tuition lesson");  //  3.
+        menuUser.setOption("Print report highest income");  //  3.
+        menuUser.runMenu();
+        return menuUser.getSelection();
     }
 }

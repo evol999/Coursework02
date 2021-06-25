@@ -20,7 +20,7 @@ class AppFlow {
         while (Boolean.TRUE) {
             selection = console.mainMenuShow();
             if (1 == selection) {
-                processStudent();
+                bookAppointmentStudent();
             }
             if (2 == selection) {
                 processAdmin();
@@ -28,21 +28,6 @@ class AppFlow {
             if (3 == selection) {
                 break;
             }
-            if (4 == selection) {
-                printLessons();
-            }
-        }
-    }
-
-    private void processStudent() {
-        int selection;
-
-        selection = console.studentStatusShow();
-        if (1 == selection) {
-            bookAppointmentStudent();
-        }
-        if (2 == selection) {
-            registerStudent();
         }
     }
 
@@ -88,7 +73,18 @@ class AppFlow {
     }
 
     private void processAdmin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int selection;
+
+        selection = console.adminMenu();
+        if (1 == selection) {
+            registerStudent();
+        }
+        if (2 == selection) {
+            printLessons();
+        }
+        if (3 == selection) {
+//            print();
+        }
     }
 
     public AppFlow() {
