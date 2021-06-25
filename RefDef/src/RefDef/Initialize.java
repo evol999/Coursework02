@@ -128,6 +128,7 @@ public class Initialize {
         String keyString;
         ArrayList<String> lessonKeyList = new ArrayList<>();
         String property;
+        DataSingleton instance = DataSingleton.getInstance();
 
         for (Object key : getProp().keySet()) {
             if (key.toString().startsWith("lesson")) {
@@ -163,7 +164,8 @@ public class Initialize {
                 tempLesson.addReviewID(Integer.parseInt(reviewID));
             }
 
-            DataSingleton.getInstance().getLessons().add(tempLesson);
+            tempLesson.setSignature(instance.generateLessonSignature(tempLesson));
+            instance.getLessons().add(tempLesson);
         }
     }
 }
