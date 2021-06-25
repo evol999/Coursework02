@@ -26,6 +26,7 @@ public class Initialize {
         loadStudents();
         loadSubjects();
         loadLessons();
+        loadReview();
         System.out.println("Hello from Init");
 
     }
@@ -166,6 +167,39 @@ public class Initialize {
 
             tempLesson.setSignature(instance.generateLessonSignature(tempLesson));
             instance.getLessons().add(tempLesson);
+        }
+    }
+
+    private void loadReview() {
+        Review tempReview;
+        int totalReviews = 0;
+        String sIndex;
+        String keyString;
+        ArrayList<String> reviewKeyList = new ArrayList<>();
+        String property;
+        DataSingleton instance = DataSingleton.getInstance();
+
+        for (Object key : getProp().keySet()) {
+            if (key.toString().startsWith("review")) {
+                reviewKeyList.add(key.toString());
+                System.out.println("Added: " + key);
+            }
+        }
+//        every review has 4 property
+        totalReviews = reviewKeyList.size() / 4;
+
+        for (int i = 0; i < totalReviews; i++) {
+            tempReview = new Review();
+            sIndex = String.format(".%02d.", i + 1);
+            keyString = "review" + sIndex;
+            System.out.println(keyString);
+            tempReview.setReviewID(i + 1);
+            tempReview.setStudentID(Integer.parseInt(prop.getProperty(keyString + "student")));
+            tempReview.setLessonID(Integer.parseInt(prop.getProperty(keyString + "lesson")));
+            tempReview.setNumericalRating(Integer.parseInt(prop.getProperty(keyString + "rating")));
+            tempReview.setWrittenReview(prop.getProperty(keyString + "review"));
+            tempReview.setSignature(instance.generateReviewSignature(tempReview));
+            instance.getReviews().add(tempReview);
         }
     }
 }
