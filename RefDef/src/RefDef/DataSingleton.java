@@ -245,7 +245,7 @@ public class DataSingleton {
             System.out.println("=================================");
             System.out.println("Lesson: " + String.format("%03d ", i + 1) + "of " + String.format("%03d. ", lessons.size()));
             lesson = lessons.get(i);
-            subject = instance.getSubjectNameByID(lesson.getLessonID());
+            subject = instance.getSubjectNameByID(lesson.getSubjectID());
             date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.LONG);
             session = instance.getSessionAsText(lesson.getSession());
             session = session.toLowerCase();

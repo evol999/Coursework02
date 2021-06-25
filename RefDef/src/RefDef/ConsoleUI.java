@@ -245,7 +245,7 @@ public class ConsoleUI implements StepsInterface {
         menuUser.setText("Lessons booked by " + name);
 
         for (Lesson lesson : lessonsBookedByStudent) {
-            subject = instance.getSubjectNameByID(lesson.getLessonID());
+            subject = instance.getSubjectNameByID(lesson.getSubjectID());
             date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.SHORT);
             session = instance.getSessionAsText(lesson.getSession());
             session = session.toLowerCase();
@@ -311,7 +311,7 @@ public class ConsoleUI implements StepsInterface {
         menuUser.setText("Lessons booked by " + name);
 
         for (Lesson lesson : lessonsBookedByStudent) {
-            subject = instance.getSubjectNameByID(lesson.getLessonID());
+            subject = instance.getSubjectNameByID(lesson.getSubjectID());
             date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.SHORT);
             session = instance.getSessionAsText(lesson.getSession());
             session = session.toLowerCase();
