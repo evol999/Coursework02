@@ -75,10 +75,10 @@ public class Lesson {
     }
 
     /**
-     * @param session the session to set
+     * @param sessionID the session to set
      */
-    public void setSession(int session) {
-        this.setSession(session);
+    public void setSession(int sessionID) {
+        this.session = Session.fromInteger(sessionID);
     }
 
     /**
@@ -196,6 +196,18 @@ public class Lesson {
      */
     public static void increaseUniqueIDcounter() {
         uniqueIDcounter++;
+    }
+
+    Boolean addReviewID(int reviewID) {
+        Boolean retVal = Boolean.TRUE;
+
+        if (getIsAvailable() && (-1 == reviewsID.indexOf(reviewID))) {
+            reviewsID.add(reviewID);
+        } else {
+            retVal = Boolean.FALSE;
+        }
+        return retVal;
+
     }
 
 }
