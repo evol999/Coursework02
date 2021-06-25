@@ -17,24 +17,11 @@ package classes <<Rectangle>> {
 		private ArrayList<Student> students;
 		private ArrayList<Review> reviews;
 		private ArrayList<WorkingDate> workingDates;
-		private void initWorkingDates()
-		public static DataSingleton getInstance()
-		void addStudent(Student tempStudent)
-		public String getStudentNameByID(int id)
-		public String generateLessonSignature(Lesson lesson)
-	}
-
-	class Student {
-		Integer studentID
-		String name
-	}
-
-	class Review {
-		Integer reviewID
-		Integer lessonID
-		Integer studentID
-		Integer rating
-		String review
+		private void initWorkingDates();
+		public static DataSingleton getInstance();
+		void addStudent(Student tempStudent);
+		public String getStudentNameByID(int id):
+		public String generateLessonSignature(Lesson lesson);
 	}
 
 	class Lesson {
@@ -48,6 +35,23 @@ package classes <<Rectangle>> {
 		private String signature;
 		private static int uniqueIDcounter = 0;
 	}
+
+	class Subject {
+		private int subjectID;
+		private String name;
+		private double price;
+		private double totalAccumulated;
+		public double getTotalAccumulated();
+		public void addToTotalPriceXtimes(int students);
+		public int compareTo(Subject o);
+	}
+	
+	class Student {
+	}
+
+	class Review {
+	}
+
 	
 	DataSingleton o-- Lesson
 	'Members <|-- Physician
