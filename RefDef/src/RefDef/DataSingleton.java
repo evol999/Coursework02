@@ -240,6 +240,7 @@ public class DataSingleton {
         String session;
         String lessonID;
         Lesson lesson;
+        Review review;
 
         for (int i = 0; i < lessons.size(); i++) {
             System.out.println("=================================");
@@ -262,6 +263,18 @@ public class DataSingleton {
                 }
             } else {
                 System.out.println("    No students registered");
+            }
+            System.out.println("Reviews:");
+            if (lesson.getReviewsID().size() > 0) {
+                for (int j = 0; j < lesson.getReviewsID().size(); j++) {
+                    review = instance.getReviewByID(lesson.getReviewsID().get(j));
+                    name = instance.getStudentNameByID(review.getStudentID());
+                    System.out.println("    Student: " + name);
+                    System.out.println("    Review: " + review.getWrittenReview());
+                    System.out.println("    Rating: " + review.getNumericalRating());
+                }
+            } else {
+                System.out.println("    No reviews registered");
             }
 
         }
