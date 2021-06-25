@@ -471,6 +471,10 @@ public class DataSingleton {
         Lesson lesson;
         String tempString;
 
+        for (Subject tempSubject : subjects) {
+            tempSubject.clearTotalAccumulated();
+        }
+
         for (int i = 0; i < lessons.size(); i++) {
             lesson = lessons.get(i);
             subject = instance.getSubjectByID(lesson.getSubjectID());

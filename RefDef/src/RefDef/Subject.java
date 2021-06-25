@@ -72,4 +72,8 @@ public class Subject implements Comparable<Subject> {
     public int compareTo(Subject o) {
         return Double.compare(o.totalAccumulated, this.totalAccumulated);
     }
+
+    void clearTotalAccumulated() {
+        totalAccumulated = 0;
+    }
 }
