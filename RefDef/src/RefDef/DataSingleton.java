@@ -312,20 +312,17 @@ public class DataSingleton {
         String signature;
         int reviewID;
 
-//        signature = generateReviewSignature(tempReview);
         signature = tempReview.getSignature();
         reviewID = findReviewIDbySignature(signature);
 
         if (0 == reviewID) {
             tempReview.setReviewID(getNewReviewID());
-//            tempReview.setSignature(signature);
+            tempReview.getLessonID();
             reviews.add(tempReview);
         } else {
             tempReview.setReviewID(reviewID);
             updateReview(tempReview);
         }
-
-//        tempReview.setSignature(signature);
 
         return;
     }
@@ -360,9 +357,7 @@ public class DataSingleton {
     boolean checkReviewExistance(Review review) {
         boolean retVal = Boolean.FALSE;
         String signature;
-        String writtenReview;
         int reviewID;
-        int numericalRating;
         Review existingReview;
 
         signature = generateReviewSignature(review);
