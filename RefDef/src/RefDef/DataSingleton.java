@@ -150,7 +150,7 @@ public class DataSingleton {
         return Lesson.getUniqueIDcounter();
     }
 
-    String generateLessonSignature(Lesson lesson) {
+    public String generateLessonSignature(Lesson lesson) {
         String retVal;
         int id;
 
@@ -317,7 +317,7 @@ public class DataSingleton {
         return;
     }
 
-    private String generateReviewSignature(Review review) {
+    public String generateReviewSignature(Review review) {
         String retVal;
         int id;
 
