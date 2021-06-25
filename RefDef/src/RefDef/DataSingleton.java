@@ -9,6 +9,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -463,6 +464,39 @@ public class DataSingleton {
             retVal /= lesson.getReviewsID().size();
         }
         return retVal;
+    }
+
+    void printReportHighestIncome() {
+        Subject subject;
+        Lesson lesson;
+        String tempString;
+
+        for (int i = 0; i < lessons.size(); i++) {
+            lesson = lessons.get(i);
+            subject = instance.getSubjectByID(lesson.getSubjectID());
+            subject.addToTotalPriceXtimes(lesson.getStudentsID().size());
+        }
+        Collections.sort(subjects);
+
+        System.out.println("Ranking  by hightest income: ");
+        for (int i = 0; i < subjects.size(); i++) {
+            tempString = String.format("%03d. ", i + 1);
+            System.out.println(tempString + subjects.get(i).getName() + " Total : " + subjects.get(i).getTotalAccumulated());
+        }
+    }
+
+    private Subject getSubjectByID(int subjectID) {
+        Subject retVal = null;
+
+        for (Subject subject : subjects) {
+            if (subject.getSubjectID() == subjectID) {
+                retVal = subject;
+                break;
+            }
+
+        }
+        return retVal;
+
     }
 
     public enum Session {

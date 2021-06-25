@@ -85,6 +85,8 @@ class AppFlow {
         if (3 == selection) {
             printReportPerTuition();
         }
+        if (4 == selection) {
+            printReportHighestIncome();
         }
     }
 
@@ -272,5 +274,10 @@ class AppFlow {
     private void printReportPerTuition() {
         DataSingleton instance = DataSingleton.getInstance();
         instance.printReportPerTuitionLesson();
+    }
+
+    private void printReportHighestIncome() {
+        DataSingleton instance = DataSingleton.getInstance();
+        instance.printReportHighestIncome();
     }
 }

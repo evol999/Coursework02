@@ -9,10 +9,11 @@ package RefDef;
  *
  * @author evol9
  */
-public class Subject {
+public class Subject implements Comparable<Subject> {
     private int subjectID;
     private String name;
     private double price;
+    private double totalAccumulated;
 
     /**
      * @return the subjectID
@@ -54,5 +55,21 @@ public class Subject {
      */
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    /**
+     * @return the totalAccumulated
+     */
+    public double getTotalAccumulated() {
+        return totalAccumulated;
+    }
+
+    public void addToTotalPriceXtimes(int times) {
+        totalAccumulated += (price * times);
+    }
+
+    @Override
+    public int compareTo(Subject o) {
+        return Double.compare(o.totalAccumulated, this.totalAccumulated);
     }
 }
