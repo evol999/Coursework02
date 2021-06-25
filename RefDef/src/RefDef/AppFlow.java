@@ -83,7 +83,8 @@ class AppFlow {
             printLessons();
         }
         if (3 == selection) {
-//            print();
+            printReportPerTuition();
+        }
         }
     }
 
@@ -204,6 +205,7 @@ class AppFlow {
         tempReview.setWrittenReview(writtenReview);
 
         instance.addReview(tempReview);
+        lesson.addReviewID(tempReview.getReviewID());
 
         if (alreadyExist) {
             console.reviewUpdated();
@@ -267,4 +269,8 @@ class AppFlow {
         }
     }
 
+    private void printReportPerTuition() {
+        DataSingleton instance = DataSingleton.getInstance();
+        instance.printReportPerTuitionLesson();
+    }
 }

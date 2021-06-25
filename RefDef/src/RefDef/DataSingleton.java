@@ -436,6 +436,40 @@ public class DataSingleton {
         return retVal;
     }
 
+    public void printReportPerTuitionLesson() {
+        String subject;
+        String date;
+        String session;
+        Lesson lesson;
+
+        for (int i = 0; i < lessons.size(); i++) {
+            System.out.println("=================================");
+            System.out.println("Lesson: " + String.format("%03d ", i + 1) + "of " + String.format("%03d. ", lessons.size()));
+            lesson = lessons.get(i);
+            subject = instance.getSubjectNameByID(lesson.getSubjectID());
+            date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.LONG);
+            session = instance.getSessionAsText(lesson.getSession());
+            session = session.toLowerCase();
+            System.out.println(date + " " + subject + " in the " + session + ".");
+            System.out.println("Students: " + lesson.getStudentsID().size());
+            System.out.println("Average rating: " + instance.getAverageRating(lesson));
+        }
+    }
+
+    private double getAverageRating(Lesson lesson) {
+        double retVal = 0;
+        Review review;
+
+        if (lesson.getReviewsID().size() > 0) {
+            for (int i : lesson.getReviewsID()) {
+                review = instance.getReviewByID(i);
+                retVal += review.getNumericalRating();
+            }
+            retVal /= lesson.getReviewsID().size();
+        }
+        return retVal;
+    }
+
     public enum Session {
         MORNING,
         AFTERNOON,

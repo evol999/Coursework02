@@ -22,7 +22,6 @@ public class Lesson {
     private Boolean isAvailable;
     private ArrayList<Integer> studentsID;
     private ArrayList<Integer> reviewsID;
-    private double averageRating;
     private String signature;
     private static int uniqueIDcounter = 0;
 
@@ -122,20 +121,6 @@ public class Lesson {
      */
     public void setReviewsID(ArrayList<Integer> reviewsID) {
         this.reviewsID = reviewsID;
-    }
-
-    /**
-     * @return the averageRating
-     */
-    public double getAverageRating() {
-        return averageRating;
-    }
-
-    /**
-     * @param averageRating the averageRating to set
-     */
-    public void setAverageRating(double averageRating) {
-        this.averageRating = averageRating;
     }
 
     Boolean addStudentID(int studentID) {
