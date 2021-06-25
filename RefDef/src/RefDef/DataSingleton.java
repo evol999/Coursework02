@@ -478,7 +478,7 @@ public class DataSingleton {
         for (int i = 0; i < lessons.size(); i++) {
             lesson = lessons.get(i);
             subject = instance.getSubjectByID(lesson.getSubjectID());
-            subject.addToTotalPriceXtimes(lesson.getStudentsID().size());
+            subject.addToTotalPriceXstudents(lesson.getStudentsID().size());
         }
         Collections.sort(subjects);
 
