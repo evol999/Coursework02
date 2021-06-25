@@ -25,7 +25,8 @@ public class Initialize {
         loadFile("config.properties");
         loadStudents();
         loadSubjects();
-        // System.out.println("Hello from Init");
+        loadLessons();
+        loadReview();
 
     }
 
@@ -117,6 +118,87 @@ public class Initialize {
             DataSingleton.getInstance().getSubjects().add(tempSubject);
             // System.out.println("Added: " + tempSubject.getName());
             // System.out.println("price: " + tempSubject.getPrice());
+        }
+    }
+
+    private void loadLessons() {
+        Lesson tempLesson;
+        int totalLessons = 0;
+        String sIndex;
+        String keyString;
+        ArrayList<String> lessonKeyList = new ArrayList<>();
+        String property;
+        DataSingleton instance = DataSingleton.getInstance();
+
+        for (Object key : getProp().keySet()) {
+            if (key.toString().startsWith("lesson")) {
+                lessonKeyList.add(key.toString());
+                System.out.println("Added: " + key);
+            }
+        }
+//        every lesson has 5 property
+        totalLessons = lessonKeyList.size() / 5;
+
+        for (int i = 0; i < totalLessons; i++) {
+            tempLesson = new Lesson();
+            sIndex = String.format(".%02d.", i + 1);
+            keyString = "lesson" + sIndex;
+            System.out.println(keyString);
+            tempLesson.setLessonID(i + 1);
+            tempLesson.setDateID(Integer.parseInt(prop.getProperty(keyString + "dateid")));
+            tempLesson.setSession(Integer.parseInt(prop.getProperty(keyString + "sessionid")));
+            property = prop.getProperty(keyString + "subjectid");
+            System.out.println("subjectid: " + property);
+            tempLesson.setSubjectID(Integer.parseInt(property));
+            property = prop.getProperty(keyString + "studentsid");
+            System.out.println("studentsid: " + property);
+            String[] students = property.split(" ");
+            for (String studentID : students) {
+                System.out.println("studentID: " + studentID);
+                tempLesson.addStudentID(Integer.parseInt(studentID));
+            }
+            property = prop.getProperty(keyString + "reviewsid");
+            String[] reviews = property.split(" ");
+            for (String reviewID : reviews) {
+                System.out.println("reviewID: " + reviewID);
+                tempLesson.addReviewID(Integer.parseInt(reviewID));
+            }
+
+            tempLesson.setSignature(instance.generateLessonSignature(tempLesson));
+            instance.getLessons().add(tempLesson);
+        }
+    }
+
+    private void loadReview() {
+        Review tempReview;
+        int totalReviews = 0;
+        String sIndex;
+        String keyString;
+        ArrayList<String> reviewKeyList = new ArrayList<>();
+        String property;
+        DataSingleton instance = DataSingleton.getInstance();
+
+        for (Object key : getProp().keySet()) {
+            if (key.toString().startsWith("review")) {
+                reviewKeyList.add(key.toString());
+                System.out.println("Added: " + key);
+            }
+        }
+//        every review has 4 property
+        totalReviews = reviewKeyList.size() / 4;
+
+        for (int i = 0; i < totalReviews; i++) {
+            tempReview = new Review();
+            sIndex = String.format(".%02d.", i + 1);
+            keyString = "review" + sIndex;
+            System.out.println(keyString);
+            tempReview.setReviewID(i + 1);
+            tempReview.setStudentID(Integer.parseInt(prop.getProperty(keyString + "student")));
+            tempReview.setLessonID(Integer.parseInt(prop.getProperty(keyString + "lesson")));
+            tempReview.setNumericalRating(Integer.parseInt(prop.getProperty(keyString + "rating")));
+            tempReview.setWrittenReview(prop.getProperty(keyString + "review"));
+            tempReview.setSignature(instance.generateReviewSignature(tempReview));
+            instance.getReviews().add(tempReview);
         }
     }
 }

@@ -28,6 +28,7 @@ public class ConsoleUI implements StepsInterface {
         menuUser.setOption("Student");  //  1.
         menuUser.setOption("Administrator");  //  2.
         menuUser.setOption("Exit");  //  3.
+        menuUser.setOption("Print lessons");  //  4.
         menuUser.runMenu();
         return menuUser.getSelection();
     }
@@ -71,9 +72,10 @@ public class ConsoleUI implements StepsInterface {
         menuUser.setText("STUDENT MENU");
         menuUser.setText(greeting);
         menuUser.setOption("Book session");         //  1.
-        menuUser.setOption("Cancel session");       //  2.
-        menuUser.setOption("Review session");       //  3.
-        menuUser.setOption("See booked sessions");  //  4.
+        menuUser.setOption("Edit session");         //  2.
+        menuUser.setOption("Cancel session");       //  3.
+        menuUser.setOption("Review session");       //  4.
+        menuUser.setOption("See booked sessions");  //  5.
         menuUser.runMenu();
         return menuUser.getSelection();
 
@@ -225,13 +227,15 @@ public class ConsoleUI implements StepsInterface {
 
     }
 
-    int selectFromBookedLessons(int studentID, ArrayList<Lesson> lessonsBookedByStudent) {
-        int retVal;
+    @Override
+    public Lesson selectFromBookedLessons(int studentID, ArrayList<Lesson> lessonsBookedByStudent) {
+        Lesson retVal;
         DataSingleton instance = DataSingleton.getInstance();
         String name;
         String subject;
         String date;
         String session;
+        int selection;
 
         name = instance.getStudentNameByID(studentID);
         menuUser.reset();
@@ -240,17 +244,18 @@ public class ConsoleUI implements StepsInterface {
         menuUser.setText("Lessons booked by " + name);
 
         for (Lesson lesson : lessonsBookedByStudent) {
-            subject = instance.getSubjectNameByID(lesson.getLessonID());
+            subject = instance.getSubjectNameByID(lesson.getSubjectID());
             date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.SHORT);
             session = instance.getSessionAsText(lesson.getSession());
             session = session.toLowerCase();
             menuUser.setOption(date + " " + subject + " in the " + session + ".");
         }
 
-        retVal = menuUser.runMenu();
-        return lessonsBookedByStudent.get(retVal - 1).getLessonID();
+        selection = menuUser.runMenu();
+        return lessonsBookedByStudent.get(selection - 1);
     }
 
+    @Override
     public int confirmation() {
         menuUser.reset();
         menuUser.setText("=================================");
@@ -261,5 +266,154 @@ public class ConsoleUI implements StepsInterface {
         menuUser.runMenu();
         return menuUser.getSelection();
 
+    }
+
+    @Override
+    public void cancellationSuccess() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("LESSON CANCELED");
+
+        menuUser.runDisplayText();
+
+    }
+
+    public void cancelNotDone() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("LESSON HAS NOT BEEN CANCELED");
+
+        menuUser.runDisplayText();
+
+    }
+
+    void noLessonsBooked() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("STUDENT HAS NO LESSONS BOOKED");
+
+        menuUser.runDisplayText();
+
+    }
+
+    void showBookedLessons(int studentID, ArrayList<Lesson> lessonsBookedByStudent) {
+        DataSingleton instance = DataSingleton.getInstance();
+        String name;
+        String subject;
+        String date;
+        String session;
+
+        name = instance.getStudentNameByID(studentID);
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("LESSONS BOOKED");
+        menuUser.setText("Lessons booked by " + name);
+
+        for (Lesson lesson : lessonsBookedByStudent) {
+            subject = instance.getSubjectNameByID(lesson.getSubjectID());
+            date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.SHORT);
+            session = instance.getSessionAsText(lesson.getSession());
+            session = session.toLowerCase();
+            menuUser.setText(date + " " + subject + " in the " + session + ".");
+        }
+        menuUser.runDisplayText();
+    }
+
+    int selectNumericalRatingReview() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("NUMERICAL RATING");
+        menuUser.setText("Please provide a numerical rating of the lesson");
+        menuUser.setOption("Very dissatisfied");    //  1.
+        menuUser.setOption("Dissatisfied");         //  2.
+        menuUser.setOption("OK");                   //  3.
+        menuUser.setOption("Satisfied");            //  4.
+        menuUser.setOption("Very satisfied");       //  5.
+        menuUser.runMenu();
+        return menuUser.getSelection();
+
+    }
+
+    String enterWrittenReview() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("LESSON REVIEW INPUT");
+        menuUser.setText("Please enter your review:");
+        menuUser.runTextCapture();
+        return menuUser.getCapturedText();
+    }
+
+    int warningReviewExist(Review review, Lesson lesson) {
+        DataSingleton instance = DataSingleton.getInstance();
+        String subject;
+        String date;
+        String session;
+
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("WARNING REVIEW ALREADY EXISTS");
+        subject = instance.getSubjectNameByID(lesson.getLessonID());
+        date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.SHORT);
+        session = instance.getSessionAsText(lesson.getSession());
+        session = session.toLowerCase();
+        menuUser.setText(date + " " + subject + " in the " + session + ".");
+        menuUser.setText("By continuing you will overwerite your previous review");
+        menuUser.setText("This is your previous review:");
+        menuUser.setText("Numerical rating: " + review.getNumericalRating());
+        menuUser.setText("Written review: " + review.getWrittenReview());
+        menuUser.setText("Do you wish to continue?");
+
+        menuUser.setOption("Yes");
+        menuUser.setOption("No");
+
+        menuUser.runMenu();
+        return menuUser.getSelection();
+    }
+
+    void reviewUpdated() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("YOUR REVIEW HAS BEEN UPDATED");
+
+        menuUser.runDisplayText();
+
+    }
+
+    void reviewAdded() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("YOUR REVIEW HAS BEEN ADDED");
+
+        menuUser.runDisplayText();
+    }
+
+    void cannotBeCancelled() {
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("CANNOT BE CANCEL");
+        menuUser.setText("Once a lesson is reviewed, the lesson cannot be cancel");
+
+        menuUser.runDisplayText();
+    }
+
+    void timeConflict(Lesson lesson) {
+        DataSingleton instance = DataSingleton.getInstance();
+        String name;
+        String subject;
+        String date;
+        String session;
+
+        name = instance.getStudentNameByID(lesson.getStudentsID().get(0));
+        menuUser.reset();
+        menuUser.setText("=================================");
+        menuUser.setText("TIME CONFLICT");
+        menuUser.setText(name + " you have a conflict with the following lesson:");
+
+        subject = instance.getSubjectNameByID(lesson.getLessonID());
+        date = instance.getLessonDateAsTextByID(lesson.getDateID(), DataSingleton.DateFormat.SHORT);
+        session = instance.getSessionAsText(lesson.getSession());
+        session = session.toLowerCase();
+        menuUser.setText(date + " " + subject + " in the " + session + ".");
+        menuUser.runDisplayText();
     }
 }

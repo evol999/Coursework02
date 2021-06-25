@@ -21,13 +21,15 @@ public class Lesson {
     private Session session;
     private Boolean isAvailable;
     private ArrayList<Integer> studentsID;
-    private ArrayList<Integer> ReviewID;
+    private ArrayList<Integer> reviewsID;
     private double averageRating;
     private String signature;
+    private static int uniqueIDcounter = 0;
 
     public Lesson() {
         this.isAvailable = Boolean.TRUE;
         this.studentsID = new ArrayList<>();
+        this.reviewsID = new ArrayList<>();
     }
 
     /**
@@ -73,24 +75,25 @@ public class Lesson {
     }
 
     /**
-     * @param session the session to set
+     * @param sessionID the session to set
      */
-    public void setSession(int session) {
-        this.setSession(session);
+    public void setSession(int sessionID) {
+        this.session = Session.fromInteger(sessionID);
     }
 
     /**
      * @return the isAvailable
      */
     public Boolean getIsAvailable() {
-        return isAvailable;
-    }
+        boolean retVal;
 
-    /**
-     * @param isAvailable the isAvailable to set
-     */
-    public void setIsAvailable(Boolean isAvailable) {
-        this.isAvailable = isAvailable;
+        if (studentsID.size() < maxStudents) {
+            retVal = Boolean.TRUE;
+        } else {
+            retVal = Boolean.FALSE;
+        }
+
+        return retVal;
     }
 
     /**
@@ -108,17 +111,17 @@ public class Lesson {
     }
 
     /**
-     * @return the ReviewID
+     * @return the ReviewsID
      */
-    public ArrayList<Integer> getReviewID() {
-        return ReviewID;
+    public ArrayList<Integer> getReviewsID() {
+        return reviewsID;
     }
 
     /**
-     * @param ReviewID the ReviewID to set
+     * @param ReviewsID the ReviewsID to set
      */
-    public void setReviewID(ArrayList<Integer> ReviewID) {
-        this.ReviewID = ReviewID;
+    public void setReviewsID(ArrayList<Integer> reviewsID) {
+        this.reviewsID = reviewsID;
     }
 
     /**
@@ -138,11 +141,8 @@ public class Lesson {
     Boolean addStudentID(int studentID) {
         Boolean retVal = Boolean.TRUE;
 
-        if (getIsAvailable()) {
+        if (getIsAvailable() && (-1 == studentsID.indexOf(studentID))) {
             studentsID.add(studentID);
-            if (studentsID.size() == maxStudents) {
-                setIsAvailable(Boolean.FALSE);
-            }
         } else
             retVal = Boolean.FALSE;
         return retVal;
@@ -182,6 +182,32 @@ public class Lesson {
             retVal = Boolean.TRUE;
         }
         return retVal;
+    }
+
+    /**
+     * @return the uniqueIDcounter
+     */
+    public static int getUniqueIDcounter() {
+        return uniqueIDcounter;
+    }
+
+    /**
+     * @return inscreased uniqueIDcounter
+     */
+    public static void increaseUniqueIDcounter() {
+        uniqueIDcounter++;
+    }
+
+    Boolean addReviewID(int reviewID) {
+        Boolean retVal = Boolean.TRUE;
+
+        if (getIsAvailable() && (-1 == reviewsID.indexOf(reviewID))) {
+            reviewsID.add(reviewID);
+        } else {
+            retVal = Boolean.FALSE;
+        }
+        return retVal;
+
     }
 
 }

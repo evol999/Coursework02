@@ -28,6 +28,9 @@ class AppFlow {
             if (3 == selection) {
                 break;
             }
+            if (4 == selection) {
+                printLessons();
+            }
         }
     }
 
@@ -59,10 +62,19 @@ class AppFlow {
         }
         selection = console.studentMenuShow(studentID);
         if (1 == selection) {
-            bookSession(studentID);
+            bookLesson(studentID);
         }
         if (2 == selection) {
-            cancelSession(studentID);
+            editLesson(studentID);
+        }
+        if (3 == selection) {
+            cancelLesson(studentID);
+        }
+        if (4 == selection) {
+            reviewLesson(studentID);
+        }
+        if (5 == selection) {
+            showBookedLesson(studentID);
         }
 
     }
@@ -83,10 +95,11 @@ class AppFlow {
         this.console = new ConsoleUI();
     }
 
-    private void bookSession(int studentID) {
+    private void bookLesson(int studentID) {
         int selection;
         Lesson tempLesson = new Lesson();
         DataSingleton.LessonStatus addStatus;
+        DataSingleton instance = DataSingleton.getInstance();
 
         tempLesson.addStudentID(studentID);
         selection = console.selectSubject();
@@ -95,7 +108,7 @@ class AppFlow {
         tempLesson.setDateID(selection);
         selection = console.selectSession();
         tempLesson.setSession(Session.fromInteger(selection));
-        addStatus = DataSingleton.getInstance().addLesson(tempLesson);
+        addStatus = instance.addLesson(tempLesson);
         if (null != addStatus) {
             switch (addStatus) {
                 case SUCCESS:
@@ -106,6 +119,9 @@ class AppFlow {
                     break;
                 case ALREADY_BOOKED:
                     console.alreadyBooked(tempLesson);
+                    break;
+                case TIME_CONFLICT:
+                    console.timeConflict(tempLesson);
                     break;
                 default:
                     break;
@@ -141,7 +157,148 @@ class AppFlow {
 //            console.noLessonsBooked();
 
         }
+    }
 
+    private void printLessons() {
+        DataSingleton instance = DataSingleton.getInstance();
+        instance.printLessons();
+    }
+
+    private void cancelLesson(int studentID) {
+        DataSingleton instance = DataSingleton.getInstance();
+        ArrayList<Lesson> lessonsBookedByStudent = null;
+        Lesson lesson;
+        int selection;
+
+        lessonsBookedByStudent = instance.getLessonsBookedByStudentID(studentID);
+
+        if (0 != lessonsBookedByStudent.size()) {
+            lesson = console.selectFromBookedLessons(studentID, lessonsBookedByStudent);
+            if (0 == lesson.getReviewsID().size()) {
+                selection = console.confirmation();
+                if (1 == selection) {
+                    instance.cancelLesson(lesson.getLessonID(), studentID);
+                    console.cancellationSuccess();
+                } else {
+                    console.cancelNotDone();
+                }
+            } else {
+                console.cannotBeCancelled();
+            }
+        } else {
+            console.noLessonsBooked();
+        }
+
+    }
+
+    private void showBookedLesson(int studentID) {
+        DataSingleton instance = DataSingleton.getInstance();
+        ArrayList<Lesson> lessonsBookedByStudent = null;
+
+        lessonsBookedByStudent = instance.getLessonsBookedByStudentID(studentID);
+
+        if (0 != lessonsBookedByStudent.size()) {
+            console.showBookedLessons(studentID, lessonsBookedByStudent);
+        } else {
+            console.noLessonsBooked();
+        }
+    }
+
+    private void reviewLesson(int studentID) {
+        int selection;
+        Review tempReview = new Review();
+        DataSingleton.LessonStatus addStatus;
+        ArrayList<Lesson> lessonsBookedByStudent = null;
+        DataSingleton instance = DataSingleton.getInstance();
+        String writtenReview;
+        boolean alreadyExist;
+        Lesson lesson;
+
+        tempReview.setStudentID(studentID);
+        lessonsBookedByStudent = instance.getLessonsBookedByStudentID(studentID);
+        if (0 == lessonsBookedByStudent.size()) {
+            console.noLessonsBooked();
+            return;
+        }
+        lesson = console.selectFromBookedLessons(studentID, lessonsBookedByStudent);
+        tempReview.setLessonID(lesson.getLessonID());
+
+        alreadyExist = instance.checkReviewExistance(tempReview);
+
+        if (alreadyExist) {
+            selection = console.warningReviewExist(tempReview, lesson);
+            if (2 == selection) {
+                return;
+            }
+        }
+
+        selection = console.selectNumericalRatingReview();
+        tempReview.setNumericalRating(selection);
+        writtenReview = console.enterWrittenReview();
+        tempReview.setWrittenReview(writtenReview);
+
+        instance.addReview(tempReview);
+
+        if (alreadyExist) {
+            console.reviewUpdated();
+        } else {
+            console.reviewAdded();
+        }
+
+    }
+
+    private void editLesson(int studentID) {
+        DataSingleton instance = DataSingleton.getInstance();
+        ArrayList<Lesson> lessonsBookedByStudent = null;
+        Lesson oldLesson;
+        Lesson newLesson;
+        int selection;
+        DataSingleton.LessonStatus editStatus;
+
+        lessonsBookedByStudent = instance.getLessonsBookedByStudentID(studentID);
+
+        if (0 != lessonsBookedByStudent.size()) {
+            oldLesson = console.selectFromBookedLessons(studentID, lessonsBookedByStudent);
+            if (0 == oldLesson.getReviewsID().size()) {
+                selection = console.confirmation();
+                if (1 == selection) {
+                    newLesson = new Lesson();
+                    newLesson.addStudentID(studentID);
+                    newLesson.setSubjectID(oldLesson.getSubjectID());
+                    selection = console.selectDate();
+                    newLesson.setDateID(selection);
+                    selection = console.selectSession();
+                    newLesson.setSession(Session.fromInteger(selection));
+                    editStatus = instance.editLesson(oldLesson, newLesson);
+
+                    if (null != editStatus) {
+                        switch (editStatus) {
+                            case SUCCESS:
+                                console.cancellationSuccess();
+                                console.bookSuccess(newLesson);
+                                break;
+                            case NOT_EMPTY_SEATS:
+                                console.notEmpty(newLesson);
+                                break;
+                            case ALREADY_BOOKED:
+                                console.alreadyBooked(newLesson);
+                                break;
+                            case TIME_CONFLICT:
+                                console.timeConflict(newLesson);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                } else {
+                    console.cancelNotDone();
+                }
+            } else {
+                console.cannotBeCancelled();
+            }
+        } else {
+            console.noLessonsBooked();
+        }
     }
 
 }
