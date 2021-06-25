@@ -80,5 +80,6 @@ package classes <<Rectangle>> {
 	Lesson -- WorkingDate
 	Lesson -- Student
 	Lesson -- Review
+	Student -- Review
 }
 @enduml
