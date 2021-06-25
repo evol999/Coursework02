@@ -38,16 +38,18 @@ package classes <<Rectangle>> {
 	}
 
 	class Lesson {
-		Integer lessonID
-		String date
-		String time
-		Integer subjectID
-		Integer studentID[4]
-		Integer reviewID[4]
-		float averageRating
+		final private int maxStudents = 4;
+		private int lessonID;
+		private int subjectID;
+		private int dateID;
+		private Session session;
+		private ArrayList<Integer> studentsID;
+		private ArrayList<Integer> reviewsID;
+		private String signature;
+		private static int uniqueIDcounter = 0;
 	}
 	
-	'User <|-- Members
+	DataSingleton o-- Lesson
 	'Members <|-- Physician
 	'Physician *- ExpertiseType
 	'TimeTable *- Appoinment
