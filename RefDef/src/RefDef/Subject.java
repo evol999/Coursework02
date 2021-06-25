@@ -64,8 +64,8 @@ public class Subject implements Comparable<Subject> {
         return totalAccumulated;
     }
 
-    public void addToTotalPriceXtimes(int times) {
-        totalAccumulated += (price * times);
+    public void addToTotalPriceXtimes(int students) {
+        totalAccumulated += (price * students);
     }
 
     @Override
